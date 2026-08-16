@@ -1,0 +1,16 @@
+# Entorno
+.venv/
+__pycache__/
+*.py[cod]
+
+# Índice vectorial (se regenera con ingest.py — no versionar)
+chroma_db/
+
+# Corpus normativo (PDFs del BOE — se descargan, no se versionan)
+data/normativa/*.pdf
+
+# Resultados de evaluación puntuales
+eval/resultados_*.json
+
+# Caché de modelos de HuggingFace si se configura en local
+.cache/

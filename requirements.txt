@@ -1,0 +1,30 @@
+# ---------------------------------------------------------------------------
+# Prototipo aislado (PoC) del núcleo RAG — TFG
+#
+# INSTALACIÓN (importante el orden):
+#   1) pip install torch --index-url https://download.pytorch.org/whl/cpu
+#   2) pip install -r requirements.txt
+#
+# El paso 1 evita que pip descargue las ruedas con CUDA (~2,5 GB) si no vas a
+# usar GPU. Si tienes GPU NVIDIA, omítelo y deja que torch se instale solo.
+#
+# Tras una instalación que funcione, congela las versiones exactas:
+#   pip freeze > requirements.lock.txt
+# y cita ese fichero en la memoria: es lo que hace el experimento reproducible.
+# ---------------------------------------------------------------------------
+
+# --- Núcleo LangChain ---
+# NO se instala el meta-paquete `langchain`: en este prototipo no hace falta.
+langchain-core
+langchain-text-splitters
+
+# --- Base de datos vectorial (arrastra chromadb) ---
+langchain-chroma
+
+# --- Embeddings locales ---
+# El extra [full] es OBLIGATORIO: la instalación base de langchain-huggingface
+# NO incluye sentence-transformers, y HuggingFaceEmbeddings lo necesita.
+langchain-huggingface[full]
+
+# --- Extracción de texto de PDF ---
+pypdf

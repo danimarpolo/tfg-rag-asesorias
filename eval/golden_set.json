@@ -1,0 +1,77 @@
+[
+  {
+    "pregunta": "¿Cuál es el plazo de prescripción del derecho de la Administración para determinar la deuda tributaria mediante liquidación?",
+    "esperados": ["LGT Artículo 66"],
+    "nota": "VERIFICAR contra el texto consolidado antes de usar en la memoria."
+  },
+  {
+    "pregunta": "¿Qué plazo tengo para interponer un recurso de reposición contra una liquidación de la AEAT?",
+    "esperados": ["LGT Artículo 223"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "Plazo para interponer una reclamación económico-administrativa ante el TEAR",
+    "esperados": ["LGT Artículo 235"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "Plazos de pago de la deuda tributaria en periodo voluntario tras una liquidación notificada",
+    "esperados": ["LGT Artículo 62"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "Recargos aplicables por presentar una autoliquidación fuera de plazo sin requerimiento previo",
+    "esperados": ["LGT Artículo 27"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "¿Cuándo se entiende practicada una notificación por comparecencia en sede electrónica?",
+    "esperados": ["LGT Artículo 112"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "Obligación de los terceros de facilitar información con trascendencia tributaria a la Administración",
+    "esperados": ["LGT Artículo 93", "LGT Artículo 94"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "¿En qué consiste el procedimiento de comprobación limitada y qué facultades tiene la Administración?",
+    "esperados": ["LGT Artículo 136", "LGT Artículo 137", "LGT Artículo 138"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "Plazo máximo de duración de las actuaciones del procedimiento de inspección",
+    "esperados": ["LGT Artículo 150"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "Reducción del importe de las sanciones tributarias por conformidad y por pronto pago",
+    "esperados": ["LGT Artículo 188"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "Carácter reservado de los datos con trascendencia tributaria obtenidos por la Administración",
+    "esperados": ["LGT Artículo 95"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "¿Cuándo se produce el devengo del IVA en las entregas de bienes y prestaciones de servicios?",
+    "esperados": ["LIVA Artículo 75"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "Requisitos formales para poder deducir el IVA soportado en una factura",
+    "esperados": ["LIVA Artículo 97"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "Supuestos de inversión del sujeto pasivo en el Impuesto sobre el Valor Añadido",
+    "esperados": ["LIVA Artículo 84"],
+    "nota": "VERIFICAR"
+  },
+  {
+    "pregunta": "¿Cómo se aplica la regla de prorrata cuando se realizan operaciones con y sin derecho a deducción?",
+    "esperados": ["LIVA Artículo 102", "LIVA Artículo 103", "LIVA Artículo 104"],
+    "nota": "VERIFICAR"
+  }
+]
