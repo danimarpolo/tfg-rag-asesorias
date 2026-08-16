@@ -10,7 +10,7 @@ chroma_db/
 data/normativa/*.pdf
 
 # Resultados de evaluación puntuales
-eval/resultados_*.json
+# eval/resultados_*.json
 
 # Caché de modelos de HuggingFace si se configura en local
 .cache/
