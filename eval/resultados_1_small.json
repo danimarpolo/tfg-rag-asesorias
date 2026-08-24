@@ -1,19 +1,19 @@
 {
   "resumen": {
-    "fecha": "2026-08-15T19:30:59",
-    "modelo_embeddings": "intfloat/multilingual-e5-base",
+    "fecha": "2026-08-16T15:42:24",
+    "modelo_embeddings": "intfloat/multilingual-e5-small",
     "max_chunk_chars": 1800,
     "chunk_overlap": 200,
     "n_preguntas": 15,
     "recall_at_k": {
-      "1": 0.8,
-      "3": 0.8667,
+      "1": 0.7333,
+      "3": 0.9333,
       "5": 0.9333,
       "10": 0.9333
     },
-    "mrr": 0.8467,
+    "mrr": 0.8333,
     "cobertura_media": 0.9333,
-    "segundos_ingesta": 902.7
+    "segundos_ingesta": 307.8
   },
   "detalle": [
     {
@@ -21,20 +21,17 @@
       "esperados": [
         "LGT Artículo 66"
       ],
-      "primera_posicion": 1,
-      "reciprocal_rank": 1.0,
+      "primera_posicion": 2,
+      "reciprocal_rank": 0.5,
       "cobertura": 1.0,
       "top_k": [
-        "lgt articulo 66",
         "lgt articulo 262",
+        "lgt articulo 66",
         "lgt articulo 68",
-        "lgt articulo 253",
+        "lgt articulo 189",
         "lgt articulo 129",
-        "lgt articulo 259",
-        "lgt articulo 251",
-        "lgt articulo 257",
-        "lgt articulo 128",
-        "lgt articulo 67"
+        "lgt articulo 67",
+        "lgt articulo 259"
       ]
     },
     {
@@ -46,14 +43,15 @@
       "reciprocal_rank": 0.5,
       "cobertura": 1.0,
       "top_k": [
-        "lgt articulo 241 bis",
-        "lgt articulo 223",
-        "lgt articulo 222",
         "lgt articulo 225",
-        "lgt articulo 244",
-        "lgt articulo 253",
-        "lgt articulo 235",
-        "lgt articulo 241"
+        "lgt articulo 223",
+        "lgt articulo 241 bis",
+        "lgt articulo 241 ter",
+        "lgt disposicion transitoria tercera",
+        "lgt articulo 271",
+        "lgt articulo 240",
+        "lgt disposicion transitoria quinta",
+        "lgt articulo 135"
       ]
     },
     {
@@ -61,19 +59,18 @@
       "esperados": [
         "LGT Artículo 235"
       ],
-      "primera_posicion": 5,
-      "reciprocal_rank": 0.2,
+      "primera_posicion": 2,
+      "reciprocal_rank": 0.5,
       "cobertura": 1.0,
       "top_k": [
         "lgt disposicion transitoria quinta",
-        "lgt articulo 225",
-        "lgt articulo 240",
-        "lgt articulo 247",
         "lgt articulo 235",
-        "lgt disposicion adicional undecima",
-        "lgt articulo 237",
-        "lgt articulo 262",
-        "lgt articulo 223"
+        "lgt articulo 245",
+        "lgt articulo 229",
+        "lgt disposicion adicional decimotercera",
+        "lgt articulo 234",
+        "lgt articulo 226",
+        "lgt disposicion adicional undecima"
       ]
     },
     {
@@ -86,14 +83,13 @@
       "cobertura": 1.0,
       "top_k": [
         "lgt articulo 62",
-        "lgt articulo 72",
-        "lgt articulo 129",
+        "lgt articulo 67",
         "lgt articulo 73",
+        "lgt articulo 129",
         "lgt articulo 161",
         "lgt articulo 255",
-        "lgt articulo 66",
-        "lgt articulo 102",
-        "lgt articulo 26"
+        "lgt articulo 95 bis",
+        "lgt articulo 271"
       ]
     },
     {
@@ -107,11 +103,11 @@
       "top_k": [
         "lgt articulo 27",
         "lgt articulo 191",
-        "lgt articulo 43",
         "lgt articulo 26",
-        "lgt articulo 120",
+        "lgt articulo 122",
         "lgt articulo 198",
-        "lgt articulo 67"
+        "lgt articulo 43",
+        "lgt articulo 120"
       ]
     },
     {
@@ -125,12 +121,12 @@
       "top_k": [
         "lgt articulo 112",
         "lgt articulo 104",
-        "lgt articulo 177 sexies",
+        "liva articulo 165",
         "lgt articulo 110",
-        "lgt articulo 62",
-        "lgt articulo 111",
         "lgt articulo 234",
-        "lgt articulo 236"
+        "lgt articulo 235",
+        "lgt articulo 236",
+        "lgt articulo 170"
       ]
     },
     {
@@ -143,13 +139,13 @@
       "reciprocal_rank": 1.0,
       "cobertura": 1.0,
       "top_k": [
-        "lgt articulo 94",
-        "lgt articulo 85",
-        "lgt articulo 95",
-        "lgt disposicion adicional vigesima quinta",
         "lgt articulo 93",
         "lgt disposicion adicional vigesima tercera",
-        "lgt articulo 92"
+        "lgt articulo 94",
+        "lgt articulo 95",
+        "lgt articulo 85",
+        "lgt articulo 177 ter",
+        "lgt articulo 90"
       ]
     },
     {
@@ -166,11 +162,11 @@
         "lgt articulo 136",
         "lgt articulo 137",
         "lgt articulo 138",
-        "lgt articulo 140",
         "lgt articulo 139",
-        "lgt articulo 141",
+        "lgt articulo 140",
         "lgt articulo 265",
-        "lgt articulo 123",
+        "lgt articulo 115",
+        "liva articulo 165",
         "lgt articulo 187"
       ]
     },
@@ -184,10 +180,11 @@
       "cobertura": 1.0,
       "top_k": [
         "lgt articulo 150",
+        "lgt articulo 253",
         "lgt articulo 148",
         "lgt articulo 104",
         "lgt articulo 159",
-        "lgt articulo 149"
+        "lgt articulo 152"
       ]
     },
     {
@@ -200,14 +197,13 @@
       "cobertura": 1.0,
       "top_k": [
         "lgt articulo 188",
+        "lgt articulo 194",
         "lgt articulo 190",
-        "liva articulo 171",
-        "lgt disposicion transitoria tercera",
-        "lgt disposicion final quinta",
-        "lgt articulo 189",
-        "lgt articulo 187",
         "lgt disposicion final octava",
-        "lgt articulo 191"
+        "lgt disposicion final quinta",
+        "lgt articulo 203",
+        "lgt articulo 212",
+        "lgt articulo 206 bis"
       ]
     },
     {
@@ -222,9 +218,8 @@
         "lgt articulo 95",
         "lgt articulo 94",
         "lgt articulo 93",
-        "lgt articulo 117",
-        "lgt articulo 29",
-        "lgt disposicion adicional vigesima quinta"
+        "lgt articulo 177 ter",
+        "liva articulo 87"
       ]
     },
     {
@@ -237,12 +232,12 @@
       "cobertura": 1.0,
       "top_k": [
         "liva articulo 75",
-        "liva disposicion transitoria duodecima",
         "liva articulo 77",
+        "liva disposicion transitoria duodecima",
         "liva articulo 76",
+        "liva articulo 84",
         "liva articulo 74",
-        "liva articulo 111",
-        "liva articulo 98"
+        "liva articulo 92"
       ]
     },
     {
@@ -255,9 +250,13 @@
       "cobertura": 1.0,
       "top_k": [
         "liva articulo 97",
-        "liva articulo 163 decies",
+        "liva disposicion adicional sexta",
+        "liva articulo 88",
+        "liva articulo 123",
         "liva articulo 99",
-        "liva articulo 165"
+        "liva articulo 165",
+        "liva articulo 92",
+        "liva articulo 95"
       ]
     },
     {
@@ -269,15 +268,15 @@
       "reciprocal_rank": 0.0,
       "cobertura": 0.0,
       "top_k": [
-        "liva articulo 123",
-        "liva articulo 104",
+        "liva articulo 92",
+        "liva articulo 140 ter",
         "liva articulo 137",
-        "liva articulo 108",
+        "liva articulo 88",
         "liva disposicion final tercera",
-        "liva articulo 163 decies",
-        "liva articulo 80",
-        "liva articulo 120",
-        "liva articulo 154"
+        "liva articulo 7",
+        "liva articulo 123",
+        "liva articulo 155",
+        "liva articulo 85"
       ]
     },
     {
@@ -293,12 +292,13 @@
       "top_k": [
         "liva articulo 102",
         "liva articulo 106",
+        "liva articulo 103",
+        "liva articulo 110",
+        "liva articulo 96",
+        "liva articulo 104",
         "liva articulo 93",
         "liva articulo 101",
-        "liva articulo 103",
-        "liva articulo 105",
-        "liva articulo 104",
-        "liva articulo 96"
+        "liva articulo 75"
       ]
     }
   ]

@@ -1,19 +1,19 @@
 {
   "resumen": {
-    "fecha": "2026-08-15T19:30:59",
+    "fecha": "2026-08-24T22:09:38",
     "modelo_embeddings": "intfloat/multilingual-e5-base",
     "max_chunk_chars": 1800,
     "chunk_overlap": 200,
     "n_preguntas": 15,
     "recall_at_k": {
-      "1": 0.8,
+      "1": 0.6667,
       "3": 0.8667,
       "5": 0.9333,
       "10": 0.9333
     },
-    "mrr": 0.8467,
+    "mrr": 0.7833,
     "cobertura_media": 0.9333,
-    "segundos_ingesta": 902.7
+    "segundos_ingesta": 894.5
   },
   "detalle": [
     {
@@ -30,11 +30,10 @@
         "lgt articulo 68",
         "lgt articulo 253",
         "lgt articulo 129",
-        "lgt articulo 259",
         "lgt articulo 251",
-        "lgt articulo 257",
-        "lgt articulo 128",
-        "lgt articulo 67"
+        "lgt articulo 259",
+        "lgt articulo 67",
+        "lgt articulo 128"
       ]
     },
     {
@@ -49,11 +48,11 @@
         "lgt articulo 241 bis",
         "lgt articulo 223",
         "lgt articulo 222",
-        "lgt articulo 225",
         "lgt articulo 244",
+        "lgt articulo 225",
         "lgt articulo 253",
-        "lgt articulo 235",
-        "lgt articulo 241"
+        "lgt articulo 241",
+        "lgt articulo 235"
       ]
     },
     {
@@ -61,19 +60,19 @@
       "esperados": [
         "LGT Artículo 235"
       ],
-      "primera_posicion": 5,
-      "reciprocal_rank": 0.2,
+      "primera_posicion": 4,
+      "reciprocal_rank": 0.25,
       "cobertura": 1.0,
       "top_k": [
         "lgt disposicion transitoria quinta",
         "lgt articulo 225",
         "lgt articulo 240",
-        "lgt articulo 247",
         "lgt articulo 235",
-        "lgt disposicion adicional undecima",
+        "lgt articulo 223",
         "lgt articulo 237",
-        "lgt articulo 262",
-        "lgt articulo 223"
+        "lgt articulo 247",
+        "lgt disposicion adicional decimocuarta",
+        "lgt articulo 241 ter"
       ]
     },
     {
@@ -88,12 +87,12 @@
         "lgt articulo 62",
         "lgt articulo 72",
         "lgt articulo 129",
+        "lgt articulo 255",
         "lgt articulo 73",
         "lgt articulo 161",
-        "lgt articulo 255",
         "lgt articulo 66",
-        "lgt articulo 102",
-        "lgt articulo 26"
+        "lgt articulo 27",
+        "lgt articulo 102"
       ]
     },
     {
@@ -108,10 +107,8 @@
         "lgt articulo 27",
         "lgt articulo 191",
         "lgt articulo 43",
-        "lgt articulo 26",
         "lgt articulo 120",
-        "lgt articulo 198",
-        "lgt articulo 67"
+        "lgt articulo 198"
       ]
     },
     {
@@ -139,17 +136,17 @@
         "LGT Artículo 93",
         "LGT Artículo 94"
       ],
-      "primera_posicion": 1,
-      "reciprocal_rank": 1.0,
+      "primera_posicion": 2,
+      "reciprocal_rank": 0.5,
       "cobertura": 1.0,
       "top_k": [
-        "lgt articulo 94",
         "lgt articulo 85",
-        "lgt articulo 95",
+        "lgt articulo 94",
         "lgt disposicion adicional vigesima quinta",
+        "lgt articulo 95",
         "lgt articulo 93",
         "lgt disposicion adicional vigesima tercera",
-        "lgt articulo 92"
+        "lgt articulo 35"
       ]
     },
     {
@@ -166,12 +163,12 @@
         "lgt articulo 136",
         "lgt articulo 137",
         "lgt articulo 138",
-        "lgt articulo 140",
         "lgt articulo 139",
+        "lgt articulo 140",
         "lgt articulo 141",
         "lgt articulo 265",
-        "lgt articulo 123",
-        "lgt articulo 187"
+        "lgt articulo 187",
+        "lgt articulo 106"
       ]
     },
     {
@@ -179,15 +176,15 @@
       "esperados": [
         "LGT Artículo 150"
       ],
-      "primera_posicion": 1,
-      "reciprocal_rank": 1.0,
+      "primera_posicion": 2,
+      "reciprocal_rank": 0.5,
       "cobertura": 1.0,
       "top_k": [
-        "lgt articulo 150",
         "lgt articulo 148",
+        "lgt articulo 150",
         "lgt articulo 104",
-        "lgt articulo 159",
-        "lgt articulo 149"
+        "lgt articulo 149",
+        "lgt articulo 159"
       ]
     },
     {
@@ -201,13 +198,13 @@
       "top_k": [
         "lgt articulo 188",
         "lgt articulo 190",
+        "lgt articulo 189",
+        "lgt articulo 187",
+        "lgt articulo 212",
         "liva articulo 171",
         "lgt disposicion transitoria tercera",
         "lgt disposicion final quinta",
-        "lgt articulo 189",
-        "lgt articulo 187",
-        "lgt disposicion final octava",
-        "lgt articulo 191"
+        "lgt articulo 180"
       ]
     },
     {
@@ -222,8 +219,8 @@
         "lgt articulo 95",
         "lgt articulo 94",
         "lgt articulo 93",
+        "lgt articulo 104",
         "lgt articulo 117",
-        "lgt articulo 29",
         "lgt disposicion adicional vigesima quinta"
       ]
     },
@@ -237,10 +234,10 @@
       "cobertura": 1.0,
       "top_k": [
         "liva articulo 75",
-        "liva disposicion transitoria duodecima",
         "liva articulo 77",
-        "liva articulo 76",
+        "liva disposicion transitoria duodecima",
         "liva articulo 74",
+        "liva articulo 76",
         "liva articulo 111",
         "liva articulo 98"
       ]
@@ -257,7 +254,7 @@
         "liva articulo 97",
         "liva articulo 163 decies",
         "liva articulo 99",
-        "liva articulo 165"
+        "lgt articulo 106"
       ]
     },
     {
@@ -272,12 +269,12 @@
         "liva articulo 123",
         "liva articulo 104",
         "liva articulo 137",
-        "liva articulo 108",
-        "liva disposicion final tercera",
         "liva articulo 163 decies",
         "liva articulo 80",
-        "liva articulo 120",
-        "liva articulo 154"
+        "liva articulo 108",
+        "liva disposicion final tercera",
+        "liva articulo 86",
+        "liva articulo 92"
       ]
     },
     {
@@ -294,8 +291,8 @@
         "liva articulo 102",
         "liva articulo 106",
         "liva articulo 93",
-        "liva articulo 101",
         "liva articulo 103",
+        "liva articulo 101",
         "liva articulo 105",
         "liva articulo 104",
         "liva articulo 96"
