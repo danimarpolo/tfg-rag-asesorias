@@ -52,8 +52,6 @@ El corpus está generado por un LLM y será procesado por un LLM, por lo que su 
 ## 2026-08-28 · Debilidad de la taxonomía de tipo_documento. 
 Las cinco clases del triaje mezclan dos ejes: cuatro describen la forma del acto administrativo (requerimiento, propuesta de liquidación, trámite de audiencia, acuerdo sancionador) y una describe la materia (requerimiento_iva_no_deducible), por lo que no son mutuamente excluyentes. Se asume conscientemente por ser una taxonomía operativa orientada al enrutamiento en una asesoría; la alternativa, separar forma_acto y materia en dos campos, queda documentada como mejora inmediata.
 
-## 2026-08-28 · Calendario de depósito. 
-El tutor confirma que la ventana de depósito del TFG es del 9 al 12 de septiembre de 2026 y que estará de vacaciones hasta el día 9, por lo que se planifica asumiendo una única ronda de revisión. Consecuencia: la memoria pasa a ser la prioridad absoluta sobre el desarrollo de software.
 
 ## 2026-08-28 · Recorte de alcance por calendario. 
 Se descarta la ampliación del golden set a 35-40 preguntas (coste 8-10 h, valor defensivo ya cubierto por la sección de limitaciones) y se reducen a 8 los requerimientos sintéticos de la AEAT. Se mantienen la prueba de troceado por longitud fija (2 h, sostiene la decisión del apartado 3.3.3) y una API con cuatro endpoints sin autenticación, con usuario fijo documentado como acotación de alcance.
