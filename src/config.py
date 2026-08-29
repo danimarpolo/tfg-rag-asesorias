@@ -18,8 +18,19 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 DATA_DIR = BASE_DIR / "data" / "normativa"   # PDFs originales del BOE
-CHROMA_DIR = BASE_DIR / "chroma_db"          # Persistencia de ChromaDB
 EVAL_DIR = BASE_DIR / "eval"                 # Conjunto de evaluación y resultados
+
+# Estrategia de troceado activa (documentada en detalle en la sección 4, con
+# la que comparte bloque conceptual). Se fija aquí, antes que CHROMA_DIR,
+# porque también decide el directorio de persistencia: cada estrategia
+# escribe en su propio índice para poder compararlas sin destruir la anterior.
+CHUNK_STRATEGY = "articulo"  # "articulo" | "longitud_fija"  -- por defecto "articulo"
+
+_CHROMA_DIR_POR_ESTRATEGIA = {
+    "articulo": BASE_DIR / "chroma_db",
+    "longitud_fija": BASE_DIR / "chroma_db_longitud_fija",
+}
+CHROMA_DIR = _CHROMA_DIR_POR_ESTRATEGIA[CHUNK_STRATEGY]   # Persistencia de ChromaDB
 
 
 # ---------------------------------------------------------------------------
@@ -69,11 +80,22 @@ USE_E5_PREFIXES = True
 # ---------------------------------------------------------------------------
 # 4. Particionado (chunking)
 # ---------------------------------------------------------------------------
-# La unidad semántica primaria es el ARTÍCULO. Solo los artículos que superen
-# MAX_CHUNK_CHARS se subdividen; el resto se indexa completo.
+# CHUNK_STRATEGY (definida en la sección 1, junto a CHROMA_DIR) selecciona la
+# unidad primaria de partición:
+#   "articulo"      -> el ARTÍCULO legal. Solo se subdivide lo que supere
+#                      MAX_CHUNK_CHARS (legal_splitter.split_ley). Estrategia
+#                      ya medida y descrita en el apartado 3.3.3 de la memoria.
+#   "longitud_fija" -> RecursiveCharacterTextSplitter sobre el texto COMPLETO
+#                      de la ley, sin ninguna conciencia de dónde empieza o
+#                      acaba un artículo (legal_splitter.split_ley_longitud_fija).
+#                      Grupo de control del experimento de ablación que
+#                      contrasta empíricamente esa decisión de diseño.
+# Los dos parámetros siguientes son el tamaño de ventana y el solapamiento del
+# RecursiveCharacterTextSplitter; se aplican por igual en ambas estrategias
+# (en "articulo" solo entran en juego para subdividir artículos largos).
 MAX_CHUNK_CHARS = 1800    # ~450-500 tokens en español
-CHUNK_OVERLAP = 200       # solapamiento entre subfragmentos de un mismo artículo
-MIN_ARTICLE_CHARS = 40    # descarta residuos del índice / falsos positivos
+CHUNK_OVERLAP = 200       # solapamiento entre fragmentos
+MIN_ARTICLE_CHARS = 40    # descarta residuos del índice / falsos positivos (solo estrategia "articulo")
 
 
 # ---------------------------------------------------------------------------

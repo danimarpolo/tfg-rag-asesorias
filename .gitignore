@@ -4,7 +4,10 @@ __pycache__/
 *.py[cod]
 
 # Índice vectorial (se regenera con ingest.py — no versionar)
+# chroma_db/ es el índice de la estrategia "articulo"; chroma_db_<otra> son
+# índices de otras CHUNK_STRATEGY (p. ej. chroma_db_longitud_fija).
 chroma_db/
+chroma_db_*/
 
 # Corpus normativo (PDFs del BOE — se descargan, no se versionan)
 data/normativa/*.pdf

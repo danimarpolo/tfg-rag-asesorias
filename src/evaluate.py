@@ -40,6 +40,7 @@ from langchain_chroma import Chroma
 
 import config
 from embeddings import get_embeddings
+from legal_splitter import ARTICULO_IDS_SEP
 
 
 def normaliza_id(valor: str) -> str:
@@ -51,6 +52,22 @@ def normaliza_id(valor: str) -> str:
     v = "".join(c for c in v if not unicodedata.combining(c))
     v = re.sub(r"\s+", " ", v.lower()).strip()
     return v
+
+
+def ids_fragmento(metadata: dict) -> list[str]:
+    """
+    Identificadores de artículo normalizados asociados a un fragmento.
+
+    En la estrategia "articulo" cada fragmento pertenece a un único artículo
+    (metadata["articulo_id"]). En "longitud_fija" puede solapar varios, que
+    legal_splitter guarda en metadata["articulo_ids"] separados por
+    ARTICULO_IDS_SEP (ChromaDB no admite listas como valor de metadato). Un
+    fragmento de preámbulo, sin artículo asociado, no aporta ningún id.
+    """
+    crudos = metadata.get("articulo_ids") or metadata.get("articulo_id") or ""
+    if not crudos:
+        return []
+    return [normaliza_id(a) for a in crudos.split(ARTICULO_IDS_SEP) if a]
 
 
 def parse_args() -> argparse.Namespace:
@@ -93,7 +110,8 @@ def main() -> int:
     suma_cobertura = 0.0
     detalle = []
 
-    print(f"\nEvaluando {len(casos)} preguntas · modelo {config.EMBEDDING_MODEL} · k={args.k}\n")
+    print(f"\nEvaluando {len(casos)} preguntas · modelo {config.EMBEDDING_MODEL} · "
+          f"estrategia={config.CHUNK_STRATEGY} · k={args.k}\n")
 
     for caso in casos:
         pregunta = caso["pregunta"]
@@ -101,13 +119,14 @@ def main() -> int:
 
         docs = vs.similarity_search(pregunta, k=args.k)
         # Ranking de artículos únicos: si un artículo aporta 2 fragmentos, su
-        # posición es la del mejor de ellos.
+        # posición es la del mejor de ellos. Un fragmento puede aportar más de
+        # un artículo (estrategia "longitud_fija"): ver ids_fragmento().
         ranking, vistos = [], set()
         for d in docs:
-            aid = normaliza_id(d.metadata["articulo_id"])
-            if aid not in vistos:
-                vistos.add(aid)
-                ranking.append(aid)
+            for aid in ids_fragmento(d.metadata):
+                if aid not in vistos:
+                    vistos.add(aid)
+                    ranking.append(aid)
 
         # Posición (1-based) del primer acierto
         primera = next((i + 1 for i, aid in enumerate(ranking) if aid in esperados), None)
@@ -142,6 +161,7 @@ def main() -> int:
     resumen = {
         "fecha": datetime.now().isoformat(timespec="seconds"),
         "modelo_embeddings": config.EMBEDDING_MODEL,
+        "chunk_strategy": config.CHUNK_STRATEGY,
         "max_chunk_chars": config.MAX_CHUNK_CHARS,
         "chunk_overlap": config.CHUNK_OVERLAP,
         "n_preguntas": n,

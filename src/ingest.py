@@ -32,7 +32,7 @@ from collections import Counter
 
 import config
 from embeddings import get_embeddings
-from legal_splitter import build_chunk_id, load_and_split
+from legal_splitter import ARTICULO_IDS_SEP, build_chunk_id, load_and_split
 
 
 def parse_args() -> argparse.Namespace:
@@ -55,17 +55,30 @@ def resumen_chunks(chunks) -> None:
 
     longitudes = [len(c.page_content) for c in chunks]
     por_ley = Counter(c.metadata["ley"] for c in chunks)
-    articulos = {(c.metadata["ley"], c.metadata["numero"]) for c in chunks}
     partidos = sum(1 for c in chunks if c.metadata["total_fragmentos"] > 1)
+    multi_articulo = sum(1 for c in chunks if c.metadata.get("num_articulos", 1) > 1)
+    sin_articulo = sum(1 for c in chunks if c.metadata.get("num_articulos", 1) == 0)
+
+    # Vía articulo_ids (longitud_fija) o articulo_id (articulo): cuenta
+    # artículos distintos aunque un fragmento solape varios.
+    articulos = set()
+    for c in chunks:
+        crudos = c.metadata.get("articulo_ids") or c.metadata.get("articulo_id", "")
+        articulos.update(a for a in crudos.split(ARTICULO_IDS_SEP) if a)
 
     print("\n" + "=" * 68)
     print("ESTADÍSTICAS DEL TROCEADO")
     print("=" * 68)
+    print(f"  Estrategia ....................... {config.CHUNK_STRATEGY}")
     print(f"  Fragmentos totales .............. {len(chunks):,}")
     print(f"  Artículos / disposiciones ....... {len(articulos):,}")
     print(f"  Fragmentos por ley .............. {dict(por_ley)}")
     print(f"  Fragmentos de artículos partidos  {partidos:,} "
           f"({100 * partidos / len(chunks):.1f}%)")
+    print(f"  Fragmentos que abarcan >1 artículo {multi_articulo:,} "
+          f"({100 * multi_articulo / len(chunks):.1f}%)")
+    print(f"  Fragmentos sin artículo (preámbulo) {sin_articulo:,} "
+          f"({100 * sin_articulo / len(chunks):.1f}%)")
     print(f"  Longitud media .................. {sum(longitudes) // len(longitudes):,} caracteres")
     print(f"  Longitud mín / máx .............. {min(longitudes):,} / {max(longitudes):,}")
     print("=" * 68)

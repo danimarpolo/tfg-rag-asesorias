@@ -59,5 +59,24 @@ Se descarta la ampliación del golden set a 35-40 preguntas (coste 8-10 h, valor
 ## 2026-08-28 · Criterio de evaluación revisado en la memoria. 
 El capítulo 5 debe presentar explícitamente que Recall@5, fijada a priori como métrica de decisión, resultó saturada (93,3 % en las cinco configuraciones) y que la decisión se trasladó a MRR y Recall@1. Presentar MRR como criterio original desaprovecha el argumento metodológico.
 
+## 2026-08-29 · Troceado por longitud fija: contrastado empíricamente.
+Implementado como segunda CHUNK_STRATEGY en config.py, con índice propio
+(chroma_db_longitud_fija) y evaluado con el mismo golden set, modelo e5-base,
+chunk=1800 y overlap=200 de la configuración base. Resultado: Recall@1 cae de
+80,0% a 26,7% y MRR de 0,8467 a 0,5345, pero Recall@10 y cobertura SUBEN a
+100% (recupera incluso LIVA art. 84, que fallaba en las cinco configuraciones
+del sondeo de modelo/chunk). Lo explica que el 50,7% de los fragmentos (402
+de 793) solapan más de un artículo: al diluirse el embedding entre dos o tres
+artículos, los vecinos compiten por las primeras posiciones y degradan la
+precisión aunque mejore la cobertura agregada. Confirma empíricamente la
+decisión del 2026-08-27 de trocear por artículo. Detalle completo en
+eval/tabla_comparativa_chunking.md.
+
+**Confound declarado** (en código, en legal_splitter.py::split_ley_longitud_fija):
+la estrategia por artículo antepone a cada fragmento una línea de contexto
+("LGT · Artículo 66...") que en longitud fija no se puede construir, así que
+la comparación es entre dos estrategias completas, no un parámetro aislado.
+Debe declararse así en la memoria.
+
 ## 2026-08-29 · req_001 y req_002 son un par de ablación de maquetación. 
 Comparten los nueve campos del golden de triaje y difieren únicamente en el formato del documento, de modo que cualquier discrepancia en la extracción es atribuible a la maquetación y no al contenido. Las métricas agregadas se calculan sobre los 13 casos de contenido distinto; req_002 se reporta por separado como prueba de robustez al formato.

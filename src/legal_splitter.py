@@ -28,6 +28,7 @@ repiten en las ~200 páginas del documento.
 
 from __future__ import annotations
 
+import bisect
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -37,6 +38,12 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from pypdf import PdfReader
 
 import config
+
+# Separador interno del metadato `articulo_ids` (estrategia "longitud_fija"):
+# ChromaDB solo admite valores escalares en los metadatos, no listas, así que
+# un fragmento que solape varios artículos los guarda como cadena delimitada.
+# Ningún identificador de artículo contiene "|".
+ARTICULO_IDS_SEP = "|"
 
 
 # ===========================================================================
@@ -278,6 +285,108 @@ def split_ley(text: str, meta: dict, source: str) -> list[Document]:
 
 
 # ===========================================================================
+# 3b. Particionado — variante de control (longitud fija)
+# ===========================================================================
+
+def split_ley_longitud_fija(text: str, meta: dict, source: str) -> list[Document]:
+    """
+    Variante de control del experimento de ablación del apartado 3.3.3: trocea
+    el texto COMPLETO de la ley con RecursiveCharacterTextSplitter, sin
+    ninguna conciencia de la estructura del articulado (ni encabezados, ni
+    títulos, ni fronteras de artículo). Se contrasta frente a `split_ley` para
+    justificar empíricamente la decisión de usar el artículo como unidad
+    primaria de partición.
+
+    CONFOUND DECLARADO (anotado también en decisiones.md): `split_ley`
+    antepone a cada fragmento una línea de contexto fija
+    ("LGT · Artículo 66. Plazos de prescripción") que aquí NO se puede
+    construir, porque un fragmento de longitud fija puede solapar varios
+    artículos, uno solo, o ninguno (texto anterior al primer encabezado). La
+    comparación de métricas entre ambas estrategias es por tanto entre dos
+    estrategias COMPLETAS —troceado y presencia/ausencia de línea de
+    contexto—, no el efecto de un único parámetro aislado.
+
+    Metadatos de artículo por desplazamiento: como el splitter no respeta las
+    fronteras del articulado, el artículo (o artículos) de cada fragmento se
+    asigna A POSTERIORI, comparando su rango de caracteres [inicio, fin) en
+    `text` contra la posición de cada encabezado que devuelve `find_headings`.
+    Un fragmento que solape el rango de más de un artículo —por cruzar su
+    frontera, o por el propio solapamiento entre fragmentos— queda etiquetado
+    con TODOS ellos en el metadato `articulo_ids` (ver ARTICULO_IDS_SEP),
+    porque ChromaDB no admite listas como valor de metadato.
+    """
+    headings = find_headings(text)
+    if not headings:
+        raise ValueError(
+            f"No se ha detectado ningún artículo en '{source}'. "
+            "Revisa que el PDF tenga capa de texto y que sea el consolidado del BOE."
+        )
+    starts = [h.start for h in headings]
+
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=config.MAX_CHUNK_CHARS,
+        chunk_overlap=config.CHUNK_OVERLAP,
+        separators=["\n\n", "\n", ". ", "; ", ", ", " ", ""],
+        length_function=len,
+    )
+    partes_brutas = splitter.split_text(text)
+
+    documents: list[Document] = []
+    cursor = 0  # el splitter avanza monótonamente: cada parte empieza donde
+                # empezó o después de donde empezó la anterior en `text`.
+
+    for j, parte_bruta in enumerate(partes_brutas):
+        pos = text.find(parte_bruta, cursor)
+        if pos == -1:
+            pos = text.find(parte_bruta)  # último recurso: no debería hacer falta
+        if pos == -1:
+            raise ValueError(
+                f"No se ha podido localizar el fragmento {j} de '{source}' "
+                "en el texto original tras el troceado por longitud fija."
+            )
+        frag_start, frag_end = pos, pos + len(parte_bruta)
+        cursor = frag_start
+
+        # Encabezados cuyo rango [start_i, start_(i+1)) solapa [frag_start, frag_end).
+        lo = max(0, bisect.bisect_right(starts, frag_start) - 1)
+        solapados = []
+        for i in range(lo, len(headings)):
+            if starts[i] >= frag_end:
+                break
+            fin_heading = starts[i + 1] if i + 1 < len(headings) else len(text)
+            if fin_heading > frag_start:
+                solapados.append(headings[i])
+
+        articulo_ids = [f"{meta['ley']} {h.etiqueta}" for h in solapados]
+
+        parte = normalize_whitespace(parte_bruta)
+        if not parte:
+            continue
+
+        documents.append(
+            Document(
+                page_content=parte,
+                metadata={
+                    "ley": meta["ley"],
+                    "ley_titulo": meta["ley_titulo"],
+                    "referencia_boe": meta["referencia_boe"],
+                    "tipo": solapados[0].tipo if solapados else "sin_encabezado",
+                    "numero": solapados[0].numero if solapados else "",
+                    "articulo_id": articulo_ids[0] if articulo_ids else "",
+                    "articulo_ids": ARTICULO_IDS_SEP.join(articulo_ids),
+                    "num_articulos": len(articulo_ids),
+                    "titulo": "",
+                    "fragmento": j + 1,
+                    "total_fragmentos": len(partes_brutas),
+                    "source": source,
+                },
+            )
+        )
+
+    return documents
+
+
+# ===========================================================================
 # 4. Punto de entrada del módulo
 # ===========================================================================
 
@@ -299,7 +408,11 @@ def load_and_split(pdf_path: Path, meta: dict) -> list[Document]:
     print(f"    · {len(text):,} caracteres tras limpieza "
           f"({100 * (1 - len(text) / len(raw)):.1f}% eliminado)")
 
-    return split_ley(text, meta, source=pdf_path.name)
+    if config.CHUNK_STRATEGY == "articulo":
+        return split_ley(text, meta, source=pdf_path.name)
+    elif config.CHUNK_STRATEGY == "longitud_fija":
+        return split_ley_longitud_fija(text, meta, source=pdf_path.name)
+    raise ValueError(f"CHUNK_STRATEGY no reconocida: {config.CHUNK_STRATEGY!r}")
 
 
 def build_chunk_id(doc: Document) -> str:

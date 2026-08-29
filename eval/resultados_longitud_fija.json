@@ -1,0 +1,344 @@
+{
+  "resumen": {
+    "fecha": "2026-08-29T17:43:55",
+    "modelo_embeddings": "intfloat/multilingual-e5-base",
+    "chunk_strategy": "longitud_fija",
+    "max_chunk_chars": 1800,
+    "chunk_overlap": 200,
+    "n_preguntas": 15,
+    "recall_at_k": {
+      "1": 0.2667,
+      "3": 0.8,
+      "5": 0.8667,
+      "10": 1.0
+    },
+    "mrr": 0.5345,
+    "cobertura_media": 1.0,
+    "segundos_ingesta": 791.3,
+    "fragmentos_totales": 793,
+    "fragmentos_por_ley": {"LGT": 415, "LIVA": 378},
+    "fragmentos_multi_articulo": 402,
+    "fragmentos_sin_articulo_preambulo": 45
+  },
+  "detalle": [
+    {
+      "pregunta": "¿Cuál es el plazo de prescripción del derecho de la Administración para determinar la deuda tributaria mediante liquidación?",
+      "esperados": [
+        "LGT Artículo 66"
+      ],
+      "primera_posicion": 7,
+      "reciprocal_rank": 0.1429,
+      "cobertura": 1.0,
+      "top_k": [
+        "lgt articulo 66 bis",
+        "lgt articulo 67",
+        "lgt articulo 127",
+        "lgt articulo 128",
+        "lgt articulo 129",
+        "lgt articulo 65",
+        "lgt articulo 66",
+        "lgt articulo 68",
+        "lgt articulo 252",
+        "lgt articulo 253"
+      ]
+    },
+    {
+      "pregunta": "¿Qué plazo tengo para interponer un recurso de reposición contra una liquidación de la AEAT?",
+      "esperados": [
+        "LGT Artículo 223"
+      ],
+      "primera_posicion": 2,
+      "reciprocal_rank": 0.5,
+      "cobertura": 1.0,
+      "top_k": [
+        "lgt articulo 222",
+        "lgt articulo 223",
+        "lgt articulo 224",
+        "lgt articulo 225",
+        "lgt articulo 226",
+        "lgt articulo 227",
+        "lgt articulo 68",
+        "lgt articulo 188",
+        "lgt articulo 247",
+        "lgt articulo 248"
+      ]
+    },
+    {
+      "pregunta": "Plazo para interponer una reclamación económico-administrativa ante el TEAR",
+      "esperados": [
+        "LGT Artículo 235"
+      ],
+      "primera_posicion": 8,
+      "reciprocal_rank": 0.125,
+      "cobertura": 1.0,
+      "top_k": [
+        "lgt articulo 245",
+        "lgt articulo 246",
+        "lgt articulo 247",
+        "lgt articulo 239",
+        "lgt articulo 240",
+        "lgt articulo 241",
+        "lgt articulo 234",
+        "lgt articulo 235",
+        "lgt articulo 225",
+        "lgt articulo 226"
+      ]
+    },
+    {
+      "pregunta": "Plazos de pago de la deuda tributaria en periodo voluntario tras una liquidación notificada",
+      "esperados": [
+        "LGT Artículo 62"
+      ],
+      "primera_posicion": 3,
+      "reciprocal_rank": 0.3333,
+      "cobertura": 1.0,
+      "top_k": [
+        "lgt articulo 60",
+        "lgt articulo 61",
+        "lgt articulo 62",
+        "lgt articulo 27",
+        "lgt articulo 255",
+        "lgt articulo 256",
+        "lgt articulo 257",
+        "lgt articulo 28",
+        "lgt articulo 72",
+        "lgt articulo 73"
+      ]
+    },
+    {
+      "pregunta": "Recargos aplicables por presentar una autoliquidación fuera de plazo sin requerimiento previo",
+      "esperados": [
+        "LGT Artículo 27"
+      ],
+      "primera_posicion": 1,
+      "reciprocal_rank": 1.0,
+      "cobertura": 1.0,
+      "top_k": [
+        "lgt articulo 27",
+        "lgt articulo 191",
+        "lgt articulo 192",
+        "lgt articulo 26",
+        "lgt articulo 28",
+        "lgt articulo 67",
+        "lgt articulo 43",
+        "lgt articulo 66 bis",
+        "lgt articulo 198"
+      ]
+    },
+    {
+      "pregunta": "¿Cuándo se entiende practicada una notificación por comparecencia en sede electrónica?",
+      "esperados": [
+        "LGT Artículo 112"
+      ],
+      "primera_posicion": 4,
+      "reciprocal_rank": 0.25,
+      "cobertura": 1.0,
+      "top_k": [
+        "lgt articulo 109",
+        "lgt articulo 110",
+        "lgt articulo 111",
+        "lgt articulo 112",
+        "lgt articulo 177 quinquies",
+        "lgt articulo 177 sexies",
+        "lgt articulo 104",
+        "lgt articulo 177 septies",
+        "lgt articulo 177 octies",
+        "lgt articulo 177 nonies"
+      ]
+    },
+    {
+      "pregunta": "Obligación de los terceros de facilitar información con trascendencia tributaria a la Administración",
+      "esperados": [
+        "LGT Artículo 93",
+        "LGT Artículo 94"
+      ],
+      "primera_posicion": 1,
+      "reciprocal_rank": 1.0,
+      "cobertura": 1.0,
+      "top_k": [
+        "lgt articulo 93",
+        "lgt articulo 94",
+        "lgt articulo 92",
+        "lgt articulo 29",
+        "lgt disposicion adicional vigesima quinta",
+        "lgt articulo 83",
+        "lgt articulo 84",
+        "lgt articulo 85",
+        "lgt articulo 86",
+        "lgt articulo 34"
+      ]
+    },
+    {
+      "pregunta": "¿En qué consiste el procedimiento de comprobación limitada y qué facultades tiene la Administración?",
+      "esperados": [
+        "LGT Artículo 136",
+        "LGT Artículo 137",
+        "LGT Artículo 138"
+      ],
+      "primera_posicion": 1,
+      "reciprocal_rank": 1.0,
+      "cobertura": 1.0,
+      "top_k": [
+        "lgt articulo 138",
+        "lgt articulo 139",
+        "lgt articulo 140",
+        "lgt articulo 135",
+        "lgt articulo 136",
+        "lgt articulo 137",
+        "lgt articulo 130",
+        "lgt articulo 131",
+        "lgt articulo 132",
+        "lgt articulo 115"
+      ]
+    },
+    {
+      "pregunta": "Plazo máximo de duración de las actuaciones del procedimiento de inspección",
+      "esperados": [
+        "LGT Artículo 150"
+      ],
+      "primera_posicion": 1,
+      "reciprocal_rank": 1.0,
+      "cobertura": 1.0,
+      "top_k": [
+        "lgt articulo 150",
+        "lgt articulo 151",
+        "lgt articulo 148",
+        "lgt articulo 149",
+        "lgt articulo 103",
+        "lgt articulo 104",
+        "lgt articulo 158",
+        "lgt articulo 159",
+        "lgt articulo 146",
+        "lgt articulo 147"
+      ]
+    },
+    {
+      "pregunta": "Reducción del importe de las sanciones tributarias por conformidad y por pronto pago",
+      "esperados": [
+        "LGT Artículo 188"
+      ],
+      "primera_posicion": 2,
+      "reciprocal_rank": 0.5,
+      "cobertura": 1.0,
+      "top_k": [
+        "lgt articulo 187",
+        "lgt articulo 188",
+        "lgt disposicion transitoria tercera",
+        "lgt disposicion transitoria cuarta",
+        "lgt articulo 189",
+        "lgt articulo 190",
+        "lgt articulo 191",
+        "lgt disposicion final quinta",
+        "lgt disposicion final sexta",
+        "lgt articulo 211"
+      ]
+    },
+    {
+      "pregunta": "Carácter reservado de los datos con trascendencia tributaria obtenidos por la Administración",
+      "esperados": [
+        "LGT Artículo 95"
+      ],
+      "primera_posicion": 2,
+      "reciprocal_rank": 0.5,
+      "cobertura": 1.0,
+      "top_k": [
+        "lgt articulo 94",
+        "lgt articulo 95",
+        "lgt articulo 115",
+        "lgt articulo 116",
+        "lgt articulo 117",
+        "lgt articulo 93",
+        "lgt articulo 29",
+        "lgt articulo 118",
+        "lgt articulo 34",
+        "lgt articulo 95 bis"
+      ]
+    },
+    {
+      "pregunta": "¿Cuándo se produce el devengo del IVA en las entregas de bienes y prestaciones de servicios?",
+      "esperados": [
+        "LIVA Artículo 75"
+      ],
+      "primera_posicion": 3,
+      "reciprocal_rank": 0.3333,
+      "cobertura": 1.0,
+      "top_k": [
+        "liva articulo 73",
+        "liva articulo 74",
+        "liva articulo 75",
+        "liva articulo 76",
+        "liva articulo 77",
+        "liva articulo 78",
+        "liva disposicion transitoria decima",
+        "liva disposicion transitoria undecima",
+        "liva disposicion transitoria duodecima",
+        "liva disposicion transitoria decimotercera"
+      ]
+    },
+    {
+      "pregunta": "Requisitos formales para poder deducir el IVA soportado en una factura",
+      "esperados": [
+        "LIVA Artículo 97"
+      ],
+      "primera_posicion": 2,
+      "reciprocal_rank": 0.5,
+      "cobertura": 1.0,
+      "top_k": [
+        "liva articulo 163 decies",
+        "liva articulo 97",
+        "liva articulo 164",
+        "liva articulo 165",
+        "lgt articulo 104",
+        "lgt articulo 105",
+        "lgt articulo 106",
+        "liva articulo 166",
+        "liva articulo 166 bis",
+        "liva articulo 99"
+      ]
+    },
+    {
+      "pregunta": "Supuestos de inversión del sujeto pasivo en el Impuesto sobre el Valor Añadido",
+      "esperados": [
+        "LIVA Artículo 84"
+      ],
+      "primera_posicion": 3,
+      "reciprocal_rank": 0.3333,
+      "cobertura": 1.0,
+      "top_k": [
+        "liva articulo 123",
+        "liva articulo 83",
+        "liva articulo 84",
+        "liva disposicion final tercera",
+        "liva articulo 137",
+        "liva articulo 138",
+        "liva articulo 139",
+        "liva articulo 140",
+        "liva articulo 107",
+        "liva articulo 108"
+      ]
+    },
+    {
+      "pregunta": "¿Cómo se aplica la regla de prorrata cuando se realizan operaciones con y sin derecho a deducción?",
+      "esperados": [
+        "LIVA Artículo 102",
+        "LIVA Artículo 103",
+        "LIVA Artículo 104"
+      ],
+      "primera_posicion": 2,
+      "reciprocal_rank": 0.5,
+      "cobertura": 1.0,
+      "top_k": [
+        "liva articulo 101",
+        "liva articulo 102",
+        "liva articulo 103",
+        "liva articulo 104",
+        "liva articulo 106",
+        "liva articulo 107",
+        "liva articulo 93",
+        "liva articulo 94",
+        "liva articulo 100",
+        "liva articulo 79"
+      ]
+    }
+  ]
+}
