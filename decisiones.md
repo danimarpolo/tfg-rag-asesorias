@@ -58,3 +58,6 @@ Se descarta la ampliación del golden set a 35-40 preguntas (coste 8-10 h, valor
 
 ## 2026-08-28 · Criterio de evaluación revisado en la memoria. 
 El capítulo 5 debe presentar explícitamente que Recall@5, fijada a priori como métrica de decisión, resultó saturada (93,3 % en las cinco configuraciones) y que la decisión se trasladó a MRR y Recall@1. Presentar MRR como criterio original desaprovecha el argumento metodológico.
+
+## 2026-08-29 · req_001 y req_002 son un par de ablación de maquetación. 
+Comparten los nueve campos del golden de triaje y difieren únicamente en el formato del documento, de modo que cualquier discrepancia en la extracción es atribuible a la maquetación y no al contenido. Las métricas agregadas se calculan sobre los 13 casos de contenido distinto; req_002 se reporta por separado como prueba de robustez al formato.
