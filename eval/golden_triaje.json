@@ -1,0 +1,214 @@
+[
+  {
+    "fichero": "req_001.pdf",
+    "tipo_documento": "requerimiento_documentacion",
+    "nif": "B00000018",
+    "impuesto": "IVA",
+    "ejercicio": 2024,
+    "periodo": "2T",
+    "articulos_citados": [
+      "LGT art. 136",
+      "LGT art. 137",
+      "LGT art. 203"
+    ],
+    "importe": null,
+    "plazo_dias": 10
+  },
+  {
+    "fichero": "req_002.pdf",
+    "tipo_documento": "requerimiento_documentacion",
+    "nif": "B00000018",
+    "impuesto": "IVA",
+    "ejercicio": 2024,
+    "periodo": "2T",
+    "articulos_citados": [
+      "LGT art. 136",
+      "LGT art. 137",
+      "LGT art. 203"
+    ],
+    "importe": null,
+    "plazo_dias": 10
+  },
+  {
+    "fichero": "req_003.pdf",
+    "tipo_documento": "requerimiento_documentacion",
+    "nif": "12345678Z",
+    "impuesto": "IRPF",
+    "ejercicio": 2023,
+    "periodo": "0A",
+    "articulos_citados": [
+      "LGT art. 136",
+      "LGT art. 203",
+      "LIRPF art. 30"
+    ],
+    "importe": null,
+    "plazo_dias": 10
+  },
+  {
+    "fichero": "req_004.pdf",
+    "tipo_documento": "requerimiento_documentacion",
+    "nif": "87654321X",
+    "impuesto": "IRPF",
+    "ejercicio": 2024,
+    "periodo": "0A",
+    "articulos_citados": [
+      "LGT art. 108",
+      "LGT art. 136",
+      "LGT art. 203"
+    ],
+    "importe": null,
+    "plazo_dias": 10
+  },
+  {
+    "fichero": "req_005.pdf",
+    "tipo_documento": "propuesta_liquidacion_provisional",
+    "nif": "11111111H",
+    "impuesto": "IRPF",
+    "ejercicio": 2023,
+    "periodo": "0A",
+    "articulos_citados": [
+      "LGT art. 101",
+      "LGT art. 138",
+      "LIRPF art. 68"
+    ],
+    "importe": 1847.63,
+    "plazo_dias": 10
+  },
+  {
+    "fichero": "req_006.pdf",
+    "tipo_documento": "propuesta_liquidacion_provisional",
+    "nif": "B22222228",
+    "impuesto": "IVA",
+    "ejercicio": 2024,
+    "periodo": "3T",
+    "articulos_citados": [
+      "LGT art. 101",
+      "LGT art. 138",
+      "LIVA art. 99"
+    ],
+    "importe": 4312.9,
+    "plazo_dias": 10
+  },
+  {
+    "fichero": "req_007.pdf",
+    "tipo_documento": "propuesta_liquidacion_provisional",
+    "nif": "44444444A",
+    "impuesto": "IRPF",
+    "ejercicio": 2024,
+    "periodo": "0A",
+    "articulos_citados": [
+      "LGT art. 101",
+      "LGT art. 102",
+      "LIRPF art. 33"
+    ],
+    "importe": 6925.44,
+    "plazo_dias": 15
+  },
+  {
+    "fichero": "req_008.pdf",
+    "tipo_documento": "requerimiento_iva_no_deducible",
+    "nif": "B55555551",
+    "impuesto": "IVA",
+    "ejercicio": 2024,
+    "periodo": "4T",
+    "articulos_citados": [
+      "LIVA art. 95",
+      "LIVA art. 96",
+      "LGT art. 136"
+    ],
+    "importe": 3104.55,
+    "plazo_dias": 10
+  },
+  {
+    "fichero": "req_009.pdf",
+    "tipo_documento": "requerimiento_iva_no_deducible",
+    "nif": "B66666660",
+    "impuesto": "IVA",
+    "ejercicio": 2024,
+    "periodo": "0A",
+    "articulos_citados": [
+      "LIVA art. 164",
+      "RIVA art. 71",
+      "LGT art. 136"
+    ],
+    "importe": 2078.31,
+    "plazo_dias": 10
+  },
+  {
+    "fichero": "req_010.pdf",
+    "tipo_documento": "requerimiento_iva_no_deducible",
+    "nif": "22222222J",
+    "impuesto": "IVA",
+    "ejercicio": 2025,
+    "periodo": "1T",
+    "articulos_citados": [
+      "LIVA art. 97",
+      "LIVA art. 99",
+      "LGT art. 203"
+    ],
+    "importe": null,
+    "plazo_dias": 10
+  },
+  {
+    "fichero": "req_011.pdf",
+    "tipo_documento": "tramite_audiencia",
+    "nif": "77777777B",
+    "impuesto": "IRPF",
+    "ejercicio": 2023,
+    "periodo": "0A",
+    "articulos_citados": [
+      "LGT art. 99",
+      "LGT art. 138",
+      "RGAT art. 96"
+    ],
+    "importe": 2560.18,
+    "plazo_dias": 15
+  },
+  {
+    "fichero": "req_012.pdf",
+    "tipo_documento": "tramite_audiencia",
+    "nif": "A99999997",
+    "impuesto": "IVA",
+    "ejercicio": 2024,
+    "periodo": "1T",
+    "articulos_citados": [
+      "LGT art. 138",
+      "RGAT art. 96",
+      "LIVA art. 95",
+      "LIVA art. 97",
+      "RIVA art. 63"
+    ],
+    "importe": 8744.26,
+    "plazo_dias": 15
+  },
+  {
+    "fichero": "req_013.pdf",
+    "tipo_documento": "acuerdo_inicio_sancionador",
+    "nif": "B88888888",
+    "impuesto": "IVA",
+    "ejercicio": 2024,
+    "periodo": "2T",
+    "articulos_citados": [
+      "LGT art. 191",
+      "LGT art. 209",
+      "LGT art. 188"
+    ],
+    "importe": 1284.6,
+    "plazo_dias": 15
+  },
+  {
+    "fichero": "req_014.pdf",
+    "tipo_documento": "acuerdo_inicio_sancionador",
+    "nif": "99999999R",
+    "impuesto": "IRPF",
+    "ejercicio": 2023,
+    "periodo": "0A",
+    "articulos_citados": [
+      "LGT art. 194",
+      "LGT art. 209",
+      "LGT art. 211"
+    ],
+    "importe": 1612.5,
+    "plazo_dias": 15
+  }
+]
