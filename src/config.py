@@ -116,3 +116,41 @@ INGEST_BATCH_SIZE = 128   # tamaño de lote al insertar en Chroma
 DEFAULT_TOP_K = 5
 EVAL_MAX_K = 10           # k máximo que se recupera en evaluate.py
 EVAL_K_VALUES = (1, 3, 5, 10)
+
+
+# ---------------------------------------------------------------------------
+# 7. Triaje de requerimientos (extracción estructurada)
+# ---------------------------------------------------------------------------
+# Módulo independiente del recuperador: extrae datos de un PDF de requerimiento
+# de la AEAT con un LLM local servido por Ollama (src/triaje.py).
+TRIAJE_CORPUS_DIR = EVAL_DIR / "corpus_triaje"
+TRIAJE_GOLDEN = EVAL_DIR / "golden_triaje.json"
+
+# Ollama debe estar arrancado en local (ollama serve) con el modelo importado.
+OLLAMA_URL = "http://localhost:11434/api/generate"
+OLLAMA_MODEL = "qwen3b-tfg"
+OLLAMA_TIMEOUT = 120      # segundos; modelo de 3B en CPU puede tardar
+
+# Reintentos ante una respuesta que no valida contra el esquema Pydantic.
+# "Hasta 2 reintentos" -> 3 intentos totales como máximo por documento.
+TRIAJE_MAX_REINTENTOS = 2
+
+# Temperatura de muestreo por intento (campo "options.temperature" de la API
+# de Ollama). El modelo es determinista a temperatura fija: repetir el mismo
+# prompt sin variar la temperatura devuelve exactamente la misma salida
+# (verificado empíricamente, hash idéntico en 5 llamadas), así que un
+# reintento "a ciegas" nunca rescata un documento. Escalar la temperatura
+# entre intentos le da al reintento una oportunidad real de obtener una
+# respuesta distinta. Si TRIAJE_MAX_REINTENTOS cambiara y hubiera más
+# intentos que temperaturas, se reutiliza la última.
+TRIAJE_TEMPERATURAS = (0.1, 0.4, 0.7)
+
+# Rango razonable para el campo "ejercicio" (año fiscal). Fijo, no dinámico
+# sobre el año actual, para que el experimento sea reproducible.
+TRIAJE_EJERCICIO_MIN = 2000
+TRIAJE_EJERCICIO_MAX = 2035
+
+# Caso de ablación de maquetación (mismo contenido, PDF distinto). Se excluye
+# de las métricas agregadas y se reporta aparte frente a TRIAJE_ABLACION_BASE.
+TRIAJE_ABLACION_CASO = "req_002.pdf"
+TRIAJE_ABLACION_BASE = "req_001.pdf"

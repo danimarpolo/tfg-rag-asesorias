@@ -1,0 +1,991 @@
+{
+  "fecha": "2026-08-30T22:52:26",
+  "modelo": "qwen3b-tfg",
+  "resumen": {
+    "n_documentos": 13,
+    "accuracy_campos_exactos": {
+      "nif": 0.9231,
+      "impuesto": 1.0,
+      "ejercicio": 1.0,
+      "periodo": 1.0,
+      "plazo_dias": 1.0
+    },
+    "tipo_documento": {
+      "accuracy": 1.0,
+      "matriz_confusion": {
+        "requerimiento_documentacion": {
+          "requerimiento_documentacion": 4
+        },
+        "propuesta_liquidacion_provisional": {
+          "propuesta_liquidacion_provisional": 5
+        },
+        "tramite_audiencia": {
+          "tramite_audiencia": 2
+        },
+        "acuerdo_inicio_sancionador": {
+          "acuerdo_inicio_sancionador": 2
+        }
+      }
+    },
+    "importe": {
+      "n_null": 4,
+      "acierto_null": 1.0,
+      "n_valor": 9,
+      "acierto_valor": 1.0
+    },
+    "articulos_citados": {
+      "precision_media": 0.4923,
+      "recall_media": 0.4667,
+      "f1_media": 0.4769,
+      "por_documento": [
+        {
+          "fichero": "req_001.pdf",
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "fichero": "req_003.pdf",
+          "precision": 1.0,
+          "recall": 0.6667,
+          "f1": 0.8
+        },
+        {
+          "fichero": "req_004.pdf",
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        {
+          "fichero": "req_005.pdf",
+          "precision": 0.3333,
+          "recall": 0.3333,
+          "f1": 0.3333
+        },
+        {
+          "fichero": "req_006.pdf",
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "fichero": "req_007.pdf",
+          "precision": 0.3333,
+          "recall": 0.3333,
+          "f1": 0.3333
+        },
+        {
+          "fichero": "req_008.pdf",
+          "precision": 0.3333,
+          "recall": 0.3333,
+          "f1": 0.3333
+        },
+        {
+          "fichero": "req_009.pdf",
+          "precision": 0.6667,
+          "recall": 0.6667,
+          "f1": 0.6667
+        },
+        {
+          "fichero": "req_010.pdf",
+          "precision": 0.3333,
+          "recall": 0.3333,
+          "f1": 0.3333
+        },
+        {
+          "fichero": "req_011.pdf",
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        {
+          "fichero": "req_012.pdf",
+          "precision": 0.4,
+          "recall": 0.4,
+          "f1": 0.4
+        },
+        {
+          "fichero": "req_013.pdf",
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        {
+          "fichero": "req_014.pdf",
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      ]
+    },
+    "cobertura_indice_lgt_liva": {
+      "articulos_unicos_en_golden": 24,
+      "en_lgt_liva": 18,
+      "fuera_lgt_liva": 6,
+      "fraccion_en_indice": 0.75
+    },
+    "validacion_pydantic": {
+      "tasa_valida_primera": 1.0,
+      "tasa_valida_tras_reintentos": 1.0,
+      "n_rescatados_por_reintento": 0,
+      "ficheros_rescatados": []
+    },
+    "calidad_nif": {
+      "n_evaluados": 13,
+      "tasa_formato_valido": 0.9231
+    },
+    "latencia_media_s": 9.22
+  },
+  "detalle": [
+    {
+      "fichero": "req_001.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 16.014,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "B00000018",
+        "impuesto": "IVA",
+        "ejercicio": "2024",
+        "periodo": "2T",
+        "plazo_dias": "10"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "requerimiento_documentacion",
+        "obtenido": "requerimiento_documentacion",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "null",
+        "esperado": null,
+        "obtenido": null,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 136",
+          "LGT art. 137",
+          "LGT art. 203"
+        ],
+        "obtenidos": [
+          "LGT art. 136",
+          "LGT art. 137",
+          "LGT art. 203"
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    {
+      "fichero": "req_002.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 8.091,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "B00000018",
+        "impuesto": "IVA",
+        "ejercicio": "2024",
+        "periodo": "2T",
+        "plazo_dias": "10"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "requerimiento_documentacion",
+        "obtenido": "requerimiento_documentacion",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "null",
+        "esperado": null,
+        "obtenido": null,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 136",
+          "LGT art. 137",
+          "LGT art. 203"
+        ],
+        "obtenidos": [
+          "LGT art. 136",
+          "LGT art. 137",
+          "LGT art. 203"
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    {
+      "fichero": "req_003.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 8.1,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "12345678Z",
+        "impuesto": "IRPF",
+        "ejercicio": "2023",
+        "periodo": "0A",
+        "plazo_dias": "10"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "requerimiento_documentacion",
+        "obtenido": "requerimiento_documentacion",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "null",
+        "esperado": null,
+        "obtenido": null,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 136",
+          "LGT art. 203",
+          "LIRPF art. 30"
+        ],
+        "obtenidos": [
+          "LGT art. 136",
+          "LGT art. 203"
+        ],
+        "precision": 1.0,
+        "recall": 0.6667,
+        "f1": 0.8
+      }
+    },
+    {
+      "fichero": "req_004.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 8.042,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "87654321X",
+        "impuesto": "IRPF",
+        "ejercicio": "2024",
+        "periodo": "0A",
+        "plazo_dias": "10"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "requerimiento_documentacion",
+        "obtenido": "requerimiento_documentacion",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "null",
+        "esperado": null,
+        "obtenido": null,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 108",
+          "LGT art. 136",
+          "LGT art. 203"
+        ],
+        "obtenidos": [
+          "LIRPF art. 108",
+          "LIRPF art. 136",
+          "LIRPF art. 203"
+        ],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    },
+    {
+      "fichero": "req_005.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 8.827,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "11111111H",
+        "impuesto": "IRPF",
+        "ejercicio": "2023",
+        "periodo": "0A",
+        "plazo_dias": "10"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "propuesta_liquidacion_provisional",
+        "obtenido": "propuesta_liquidacion_provisional",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "valor",
+        "esperado": 1847.63,
+        "obtenido": 1847.63,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 101",
+          "LGT art. 138",
+          "LIRPF art. 68"
+        ],
+        "obtenidos": [
+          "LIRPF art. 101",
+          "LIRPF art. 138",
+          "LIRPF art. 68"
+        ],
+        "precision": 0.3333,
+        "recall": 0.3333,
+        "f1": 0.3333
+      }
+    },
+    {
+      "fichero": "req_006.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 9.311,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "B22222228",
+        "impuesto": "IVA",
+        "ejercicio": "2024",
+        "periodo": "3T",
+        "plazo_dias": "10"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "propuesta_liquidacion_provisional",
+        "obtenido": "propuesta_liquidacion_provisional",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "valor",
+        "esperado": 4312.9,
+        "obtenido": 4312.9,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 101",
+          "LGT art. 138",
+          "LIVA art. 99"
+        ],
+        "obtenidos": [
+          "LGT art. 101",
+          "LGT art. 138",
+          "LIVA art. 99"
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    {
+      "fichero": "req_007.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 8.879,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "44444444A",
+        "impuesto": "IRPF",
+        "ejercicio": "2024",
+        "periodo": "0A",
+        "plazo_dias": "15"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "propuesta_liquidacion_provisional",
+        "obtenido": "propuesta_liquidacion_provisional",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "valor",
+        "esperado": 6925.44,
+        "obtenido": 6925.44,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 101",
+          "LGT art. 102",
+          "LIRPF art. 33"
+        ],
+        "obtenidos": [
+          "LIRPF art. 101",
+          "LIRPF art. 102",
+          "LIRPF art. 33"
+        ],
+        "precision": 0.3333,
+        "recall": 0.3333,
+        "f1": 0.3333
+      }
+    },
+    {
+      "fichero": "req_008.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 8.69,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "B55555551",
+        "impuesto": "IVA",
+        "ejercicio": "2024",
+        "periodo": "4T",
+        "plazo_dias": "10"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "propuesta_liquidacion_provisional",
+        "obtenido": "propuesta_liquidacion_provisional",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "valor",
+        "esperado": 3104.55,
+        "obtenido": 3104.55,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 136",
+          "LIVA art. 95",
+          "LIVA art. 96"
+        ],
+        "obtenidos": [
+          "LGT art. 136",
+          "LGT art. 95",
+          "LGT art. 96"
+        ],
+        "precision": 0.3333,
+        "recall": 0.3333,
+        "f1": 0.3333
+      }
+    },
+    {
+      "fichero": "req_009.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 9.135,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "B66666660",
+        "impuesto": "IVA",
+        "ejercicio": "2024",
+        "periodo": "0A",
+        "plazo_dias": "10"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "propuesta_liquidacion_provisional",
+        "obtenido": "propuesta_liquidacion_provisional",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "valor",
+        "esperado": 2078.31,
+        "obtenido": 2078.31,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 136",
+          "LIVA art. 164",
+          "RIVA art. 71"
+        ],
+        "obtenidos": [
+          "LGT art. 136",
+          "LGT art. 164",
+          "RIVA art. 71"
+        ],
+        "precision": 0.6667,
+        "recall": 0.6667,
+        "f1": 0.6667
+      }
+    },
+    {
+      "fichero": "req_010.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 8.209,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "22222222J",
+        "impuesto": "IVA",
+        "ejercicio": "2025",
+        "periodo": "1T",
+        "plazo_dias": "10"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "requerimiento_documentacion",
+        "obtenido": "requerimiento_documentacion",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "null",
+        "esperado": null,
+        "obtenido": null,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 203",
+          "LIVA art. 97",
+          "LIVA art. 99"
+        ],
+        "obtenidos": [
+          "LGT art. 203",
+          "LGT art. 97",
+          "LGT art. 99"
+        ],
+        "precision": 0.3333,
+        "recall": 0.3333,
+        "f1": 0.3333
+      }
+    },
+    {
+      "fichero": "req_011.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 8.183,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "77777777B",
+        "impuesto": "IRPF",
+        "ejercicio": "2023",
+        "periodo": "0A",
+        "plazo_dias": "15"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "tramite_audiencia",
+        "obtenido": "tramite_audiencia",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "valor",
+        "esperado": 2560.18,
+        "obtenido": 2560.18,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 138",
+          "LGT art. 99",
+          "RGAT art. 96"
+        ],
+        "obtenidos": [
+          "LIRPF art. 138",
+          "LIRPF art. 99"
+        ],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    },
+    {
+      "fichero": "req_012.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 9.376,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": false,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "A9999997",
+        "impuesto": "IVA",
+        "ejercicio": "2024",
+        "periodo": "1T",
+        "plazo_dias": "15"
+      },
+      "nif_formato_valido": false,
+      "tipo_documento": {
+        "esperado": "tramite_audiencia",
+        "obtenido": "tramite_audiencia",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "valor",
+        "esperado": 8744.26,
+        "obtenido": 8744.26,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 138",
+          "LIVA art. 95",
+          "LIVA art. 97",
+          "RGAT art. 96",
+          "RIVA art. 63"
+        ],
+        "obtenidos": [
+          "LGT art. 138",
+          "RGAT art. 63",
+          "RGAT art. 95",
+          "RGAT art. 96",
+          "RGAT art. 97"
+        ],
+        "precision": 0.4,
+        "recall": 0.4,
+        "f1": 0.4
+      }
+    },
+    {
+      "fichero": "req_013.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 8.404,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "B88888888",
+        "impuesto": "IVA",
+        "ejercicio": "2024",
+        "periodo": "2T",
+        "plazo_dias": "15"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "acuerdo_inicio_sancionador",
+        "obtenido": "acuerdo_inicio_sancionador",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "valor",
+        "esperado": 1284.6,
+        "obtenido": 1284.6,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 188",
+          "LGT art. 191",
+          "LGT art. 209"
+        ],
+        "obtenidos": [
+          "LGT art. 188",
+          "LGT art. 191",
+          "LGT art. 209"
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    {
+      "fichero": "req_014.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 8.689,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "99999999R",
+        "impuesto": "IRPF",
+        "ejercicio": "2023",
+        "periodo": "0A",
+        "plazo_dias": "15"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "acuerdo_inicio_sancionador",
+        "obtenido": "acuerdo_inicio_sancionador",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "valor",
+        "esperado": 1612.5,
+        "obtenido": 1612.5,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 194",
+          "LGT art. 209",
+          "LGT art. 211"
+        ],
+        "obtenidos": [
+          "LIRPF art. 194",
+          "LIRPF art. 209",
+          "LIRPF art. 211"
+        ],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    }
+  ],
+  "ablacion_maquetacion": {
+    "req_001": {
+      "fichero": "req_001.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 16.014,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "B00000018",
+        "impuesto": "IVA",
+        "ejercicio": "2024",
+        "periodo": "2T",
+        "plazo_dias": "10"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "requerimiento_documentacion",
+        "obtenido": "requerimiento_documentacion",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "null",
+        "esperado": null,
+        "obtenido": null,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 136",
+          "LGT art. 137",
+          "LGT art. 203"
+        ],
+        "obtenidos": [
+          "LGT art. 136",
+          "LGT art. 137",
+          "LGT art. 203"
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "req_002": {
+      "fichero": "req_002.pdf",
+      "valido": true,
+      "intentos_usados": 1,
+      "temperatura_usada": 0.1,
+      "latencia_s": 8.091,
+      "error": null,
+      "aciertos_exactos": {
+        "nif": true,
+        "impuesto": true,
+        "ejercicio": true,
+        "periodo": true,
+        "plazo_dias": true
+      },
+      "valores_obtenidos": {
+        "nif": "B00000018",
+        "impuesto": "IVA",
+        "ejercicio": "2024",
+        "periodo": "2T",
+        "plazo_dias": "10"
+      },
+      "nif_formato_valido": true,
+      "tipo_documento": {
+        "esperado": "requerimiento_documentacion",
+        "obtenido": "requerimiento_documentacion",
+        "acierto": true
+      },
+      "importe": {
+        "caso": "null",
+        "esperado": null,
+        "obtenido": null,
+        "acierto": true
+      },
+      "articulos_citados": {
+        "esperados": [
+          "LGT art. 136",
+          "LGT art. 137",
+          "LGT art. 203"
+        ],
+        "obtenidos": [
+          "LGT art. 136",
+          "LGT art. 137",
+          "LGT art. 203"
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "detalle_comparado": [
+      {
+        "campo": "nif",
+        "esperado": "B00000018",
+        "req_001_correcto": true,
+        "req_002_correcto": true,
+        "req_001_vs_req_002_coinciden": true
+      },
+      {
+        "campo": "impuesto",
+        "esperado": "IVA",
+        "req_001_correcto": true,
+        "req_002_correcto": true,
+        "req_001_vs_req_002_coinciden": true
+      },
+      {
+        "campo": "ejercicio",
+        "esperado": 2024,
+        "req_001_correcto": true,
+        "req_002_correcto": true,
+        "req_001_vs_req_002_coinciden": true
+      },
+      {
+        "campo": "periodo",
+        "esperado": "2T",
+        "req_001_correcto": true,
+        "req_002_correcto": true,
+        "req_001_vs_req_002_coinciden": true
+      },
+      {
+        "campo": "plazo_dias",
+        "esperado": 10,
+        "req_001_correcto": true,
+        "req_002_correcto": true,
+        "req_001_vs_req_002_coinciden": true
+      },
+      {
+        "campo": "tipo_documento",
+        "esperado": "requerimiento_documentacion",
+        "req_001_correcto": true,
+        "req_002_correcto": true,
+        "req_001_vs_req_002_coinciden": true
+      },
+      {
+        "campo": "importe",
+        "esperado": null,
+        "req_001_correcto": true,
+        "req_002_correcto": true,
+        "req_001_vs_req_002_coinciden": true
+      },
+      {
+        "campo": "articulos_citados",
+        "esperado": [
+          "LGT art. 136",
+          "LGT art. 137",
+          "LGT art. 203"
+        ],
+        "req_001_f1": 1.0,
+        "req_002_f1": 1.0,
+        "req_001_vs_req_002_coinciden": true
+      }
+    ]
+  }
+}

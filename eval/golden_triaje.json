@@ -106,7 +106,7 @@
   },
   {
     "fichero": "req_008.pdf",
-    "tipo_documento": "requerimiento_iva_no_deducible",
+    "tipo_documento": "propuesta_liquidacion_provisional",
     "nif": "B55555551",
     "impuesto": "IVA",
     "ejercicio": 2024,
@@ -121,7 +121,7 @@
   },
   {
     "fichero": "req_009.pdf",
-    "tipo_documento": "requerimiento_iva_no_deducible",
+    "tipo_documento": "propuesta_liquidacion_provisional",
     "nif": "B66666660",
     "impuesto": "IVA",
     "ejercicio": 2024,
@@ -136,7 +136,7 @@
   },
   {
     "fichero": "req_010.pdf",
-    "tipo_documento": "requerimiento_iva_no_deducible",
+    "tipo_documento": "requerimiento_documentacion",
     "nif": "22222222J",
     "impuesto": "IVA",
     "ejercicio": 2025,
