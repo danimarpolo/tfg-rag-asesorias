@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-08-30T22:52:26",
+  "fecha": "2026-08-30T23:19:38",
   "modelo": "qwen3b-tfg",
   "resumen": {
     "n_documentos": 13,
@@ -37,84 +37,116 @@
       "precision_media": 0.4923,
       "recall_media": 0.4667,
       "f1_media": 0.4769,
+      "precision_laxo_media": 1.0,
+      "recall_laxo_media": 0.9487,
+      "f1_laxo_media": 0.9692,
+      "n_atribuibles_total": 39,
+      "n_atribuidos_bien_total": 19,
+      "tasa_atribucion_correcta": 0.4872,
       "por_documento": [
         {
           "fichero": "req_001.pdf",
           "precision": 1.0,
           "recall": 1.0,
-          "f1": 1.0
+          "f1": 1.0,
+          "f1_laxo": 1.0,
+          "tasa_atribucion_correcta": 1.0
         },
         {
           "fichero": "req_003.pdf",
           "precision": 1.0,
           "recall": 0.6667,
-          "f1": 0.8
+          "f1": 0.8,
+          "f1_laxo": 0.8,
+          "tasa_atribucion_correcta": 1.0
         },
         {
           "fichero": "req_004.pdf",
           "precision": 0.0,
           "recall": 0.0,
-          "f1": 0.0
+          "f1": 0.0,
+          "f1_laxo": 1.0,
+          "tasa_atribucion_correcta": 0.0
         },
         {
           "fichero": "req_005.pdf",
           "precision": 0.3333,
           "recall": 0.3333,
-          "f1": 0.3333
+          "f1": 0.3333,
+          "f1_laxo": 1.0,
+          "tasa_atribucion_correcta": 0.3333
         },
         {
           "fichero": "req_006.pdf",
           "precision": 1.0,
           "recall": 1.0,
-          "f1": 1.0
+          "f1": 1.0,
+          "f1_laxo": 1.0,
+          "tasa_atribucion_correcta": 1.0
         },
         {
           "fichero": "req_007.pdf",
           "precision": 0.3333,
           "recall": 0.3333,
-          "f1": 0.3333
+          "f1": 0.3333,
+          "f1_laxo": 1.0,
+          "tasa_atribucion_correcta": 0.3333
         },
         {
           "fichero": "req_008.pdf",
           "precision": 0.3333,
           "recall": 0.3333,
-          "f1": 0.3333
+          "f1": 0.3333,
+          "f1_laxo": 1.0,
+          "tasa_atribucion_correcta": 0.3333
         },
         {
           "fichero": "req_009.pdf",
           "precision": 0.6667,
           "recall": 0.6667,
-          "f1": 0.6667
+          "f1": 0.6667,
+          "f1_laxo": 1.0,
+          "tasa_atribucion_correcta": 0.6667
         },
         {
           "fichero": "req_010.pdf",
           "precision": 0.3333,
           "recall": 0.3333,
-          "f1": 0.3333
+          "f1": 0.3333,
+          "f1_laxo": 1.0,
+          "tasa_atribucion_correcta": 0.3333
         },
         {
           "fichero": "req_011.pdf",
           "precision": 0.0,
           "recall": 0.0,
-          "f1": 0.0
+          "f1": 0.0,
+          "f1_laxo": 0.8,
+          "tasa_atribucion_correcta": 0.0
         },
         {
           "fichero": "req_012.pdf",
           "precision": 0.4,
           "recall": 0.4,
-          "f1": 0.4
+          "f1": 0.4,
+          "f1_laxo": 1.0,
+          "tasa_atribucion_correcta": 0.4
         },
         {
           "fichero": "req_013.pdf",
           "precision": 1.0,
           "recall": 1.0,
-          "f1": 1.0
+          "f1": 1.0,
+          "f1_laxo": 1.0,
+          "tasa_atribucion_correcta": 1.0
         },
         {
           "fichero": "req_014.pdf",
           "precision": 0.0,
           "recall": 0.0,
-          "f1": 0.0
+          "f1": 0.0,
+          "f1_laxo": 1.0,
+          "tasa_atribucion_correcta": 0.0
         }
       ]
     },
@@ -134,7 +166,7 @@
       "n_evaluados": 13,
       "tasa_formato_valido": 0.9231
     },
-    "latencia_media_s": 9.22
+    "latencia_media_s": 9.273
   },
   "detalle": [
     {
@@ -142,7 +174,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 16.014,
+      "latencia_s": 16.127,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -183,7 +215,13 @@
         ],
         "precision": 1.0,
         "recall": 1.0,
-        "f1": 1.0
+        "f1": 1.0,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 3,
+        "tasa_atribucion_correcta": 1.0
       }
     },
     {
@@ -191,7 +229,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 8.091,
+      "latencia_s": 8.145,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -232,7 +270,13 @@
         ],
         "precision": 1.0,
         "recall": 1.0,
-        "f1": 1.0
+        "f1": 1.0,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 3,
+        "tasa_atribucion_correcta": 1.0
       }
     },
     {
@@ -240,7 +284,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 8.1,
+      "latencia_s": 8.129,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -280,7 +324,13 @@
         ],
         "precision": 1.0,
         "recall": 0.6667,
-        "f1": 0.8
+        "f1": 0.8,
+        "precision_laxo": 1.0,
+        "recall_laxo": 0.6667,
+        "f1_laxo": 0.8,
+        "n_atribuibles": 2,
+        "n_atribuidos_bien": 2,
+        "tasa_atribucion_correcta": 1.0
       }
     },
     {
@@ -288,7 +338,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 8.042,
+      "latencia_s": 8.057,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -329,7 +379,13 @@
         ],
         "precision": 0.0,
         "recall": 0.0,
-        "f1": 0.0
+        "f1": 0.0,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 0,
+        "tasa_atribucion_correcta": 0.0
       }
     },
     {
@@ -337,7 +393,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 8.827,
+      "latencia_s": 8.887,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -378,7 +434,13 @@
         ],
         "precision": 0.3333,
         "recall": 0.3333,
-        "f1": 0.3333
+        "f1": 0.3333,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 1,
+        "tasa_atribucion_correcta": 0.3333
       }
     },
     {
@@ -386,7 +448,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 9.311,
+      "latencia_s": 9.381,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -427,7 +489,13 @@
         ],
         "precision": 1.0,
         "recall": 1.0,
-        "f1": 1.0
+        "f1": 1.0,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 3,
+        "tasa_atribucion_correcta": 1.0
       }
     },
     {
@@ -435,7 +503,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 8.879,
+      "latencia_s": 8.969,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -476,7 +544,13 @@
         ],
         "precision": 0.3333,
         "recall": 0.3333,
-        "f1": 0.3333
+        "f1": 0.3333,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 1,
+        "tasa_atribucion_correcta": 0.3333
       }
     },
     {
@@ -484,7 +558,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 8.69,
+      "latencia_s": 8.772,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -525,7 +599,13 @@
         ],
         "precision": 0.3333,
         "recall": 0.3333,
-        "f1": 0.3333
+        "f1": 0.3333,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 1,
+        "tasa_atribucion_correcta": 0.3333
       }
     },
     {
@@ -533,7 +613,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 9.135,
+      "latencia_s": 9.163,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -574,7 +654,13 @@
         ],
         "precision": 0.6667,
         "recall": 0.6667,
-        "f1": 0.6667
+        "f1": 0.6667,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 2,
+        "tasa_atribucion_correcta": 0.6667
       }
     },
     {
@@ -582,7 +668,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 8.209,
+      "latencia_s": 8.206,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -623,7 +709,13 @@
         ],
         "precision": 0.3333,
         "recall": 0.3333,
-        "f1": 0.3333
+        "f1": 0.3333,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 1,
+        "tasa_atribucion_correcta": 0.3333
       }
     },
     {
@@ -631,7 +723,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 8.183,
+      "latencia_s": 8.227,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -671,7 +763,13 @@
         ],
         "precision": 0.0,
         "recall": 0.0,
-        "f1": 0.0
+        "f1": 0.0,
+        "precision_laxo": 1.0,
+        "recall_laxo": 0.6667,
+        "f1_laxo": 0.8,
+        "n_atribuibles": 2,
+        "n_atribuidos_bien": 0,
+        "tasa_atribucion_correcta": 0.0
       }
     },
     {
@@ -679,7 +777,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 9.376,
+      "latencia_s": 9.443,
       "error": null,
       "aciertos_exactos": {
         "nif": false,
@@ -724,7 +822,13 @@
         ],
         "precision": 0.4,
         "recall": 0.4,
-        "f1": 0.4
+        "f1": 0.4,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 5,
+        "n_atribuidos_bien": 2,
+        "tasa_atribucion_correcta": 0.4
       }
     },
     {
@@ -732,7 +836,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 8.404,
+      "latencia_s": 8.489,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -773,7 +877,13 @@
         ],
         "precision": 1.0,
         "recall": 1.0,
-        "f1": 1.0
+        "f1": 1.0,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 3,
+        "tasa_atribucion_correcta": 1.0
       }
     },
     {
@@ -781,7 +891,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 8.689,
+      "latencia_s": 8.705,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -822,7 +932,13 @@
         ],
         "precision": 0.0,
         "recall": 0.0,
-        "f1": 0.0
+        "f1": 0.0,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 0,
+        "tasa_atribucion_correcta": 0.0
       }
     }
   ],
@@ -832,7 +948,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 16.014,
+      "latencia_s": 16.127,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -873,7 +989,13 @@
         ],
         "precision": 1.0,
         "recall": 1.0,
-        "f1": 1.0
+        "f1": 1.0,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 3,
+        "tasa_atribucion_correcta": 1.0
       }
     },
     "req_002": {
@@ -881,7 +1003,7 @@
       "valido": true,
       "intentos_usados": 1,
       "temperatura_usada": 0.1,
-      "latencia_s": 8.091,
+      "latencia_s": 8.145,
       "error": null,
       "aciertos_exactos": {
         "nif": true,
@@ -922,7 +1044,13 @@
         ],
         "precision": 1.0,
         "recall": 1.0,
-        "f1": 1.0
+        "f1": 1.0,
+        "precision_laxo": 1.0,
+        "recall_laxo": 1.0,
+        "f1_laxo": 1.0,
+        "n_atribuibles": 3,
+        "n_atribuidos_bien": 3,
+        "tasa_atribucion_correcta": 1.0
       }
     },
     "detalle_comparado": [

@@ -29,29 +29,35 @@ Evaluación de `src/triaje.py` (modelo `qwen3b-tfg` vía Ollama) contra el golde
 | requerimiento_documentacion | 0 | 0 | 4 | 0 |
 | tramite_audiencia | 0 | 0 | 0 | 2 |
 
-## articulos_citados (precisión / exhaustividad / F1)
+## articulos_citados: localizar vs. atribuir
 
-| Precisión media | Exhaustividad media | F1 media |
-|---:|---:|---:|
-| 49.2 % | 46.7 % | 47.7 % |
+Dos criterios distintos, no uno solo: **estricto** exige ley y número ("LGT art. 203"), y mide localizar la referencia Y atribuirla a la norma correcta a la vez. **Laxo** compara solo el número de artículo, ignorando la ley, y mide únicamente si el modelo localiza la referencia en el texto. La brecha entre ambos aísla los fallos de atribución de norma (ver decisiones.md): un F1 laxo alto con F1 estricto bajo indica que el modelo encuentra los artículos pero los atribuye a la ley equivocada, no que no los encuentre.
 
-### F1 por documento
+| Métrica | Estricto (ley + número) | Laxo (solo número) |
+|---|---:|---:|
+| Precisión media | 49.2 % | 100.0 % |
+| Exhaustividad media | 46.7 % | 94.9 % |
+| F1 media | 47.7 % | 96.9 % |
 
-| Fichero | Precisión | Exhaustividad | F1 |
+**Tasa de atribución correcta**: de los 39 números de artículo localizados correctamente (aciertos del criterio laxo), **19** llevan además la ley correcta — 48.7 %. Micro-promedio sobre todo el corpus (no media de tasas por documento, con recuentos por documento demasiado pequeños para que esa media sea representativa).
+
+### F1 por documento (estricto vs. laxo) y atribución
+
+| Fichero | F1 estricto | F1 laxo | Atribución correcta |
 |---|---:|---:|---:|
 | req_001.pdf | 100.0 % | 100.0 % | 100.0 % |
-| req_003.pdf | 100.0 % | 66.7 % | 80.0 % |
-| req_004.pdf | 0.0 % | 0.0 % | 0.0 % |
-| req_005.pdf | 33.3 % | 33.3 % | 33.3 % |
+| req_003.pdf | 80.0 % | 80.0 % | 100.0 % |
+| req_004.pdf | 0.0 % | 100.0 % | 0.0 % |
+| req_005.pdf | 33.3 % | 100.0 % | 33.3 % |
 | req_006.pdf | 100.0 % | 100.0 % | 100.0 % |
-| req_007.pdf | 33.3 % | 33.3 % | 33.3 % |
-| req_008.pdf | 33.3 % | 33.3 % | 33.3 % |
-| req_009.pdf | 66.7 % | 66.7 % | 66.7 % |
-| req_010.pdf | 33.3 % | 33.3 % | 33.3 % |
-| req_011.pdf | 0.0 % | 0.0 % | 0.0 % |
-| req_012.pdf | 40.0 % | 40.0 % | 40.0 % |
+| req_007.pdf | 33.3 % | 100.0 % | 33.3 % |
+| req_008.pdf | 33.3 % | 100.0 % | 33.3 % |
+| req_009.pdf | 66.7 % | 100.0 % | 66.7 % |
+| req_010.pdf | 33.3 % | 100.0 % | 33.3 % |
+| req_011.pdf | 0.0 % | 80.0 % | 0.0 % |
+| req_012.pdf | 40.0 % | 100.0 % | 40.0 % |
 | req_013.pdf | 100.0 % | 100.0 % | 100.0 % |
-| req_014.pdf | 0.0 % | 0.0 % | 0.0 % |
+| req_014.pdf | 0.0 % | 100.0 % | 0.0 % |
 
 ## Cobertura del índice (LGT/LIVA vs. otras normas)
 
@@ -66,7 +72,7 @@ De 24 artículos únicos citados en el golden set: **18** pertenecen a LGT o LIV
 | Válida a la primera | 100.0 % |
 | Válida tras reintentos (máx. 2, temperaturas (0.1, 0.4, 0.7)) | 100.0 % |
 | Documentos rescatados por variar la temperatura | 0 |
-| Latencia media / documento | 9.22 s |
+| Latencia media / documento | 9.27 s |
 
 ## Calidad de NIF (campo derivado, no invalida el esquema)
 

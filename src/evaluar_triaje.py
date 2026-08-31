@@ -31,8 +31,14 @@ capítulo 5 de la memoria):
         Coincidencia exacta sobre el conjunto cerrado de 5 valores, más una
         matriz de confusión.
   · articulos_citados
-        Precisión / exhaustividad / F1 sobre el conjunto, normalizando cada
-        referencia a forma canónica "LEY art. N" antes de comparar.
+        Dos criterios, no uno: ESTRICTO (precisión/exhaustividad/F1 exigiendo
+        ley + número, forma canónica "LEY art. N") y LAXO (mismo cálculo
+        ignorando la ley, solo el número). La brecha entre ambos separa dos
+        capacidades distintas —localizar la referencia en el texto, y
+        atribuirla a la norma correcta— que una única media confunde (ver
+        decisiones.md, 2026-08-30). tasa_atribucion_correcta cuantifica esa
+        brecha directamente: de los números bien localizados, qué fracción
+        lleva además la ley correcta.
 
 Las métricas agregadas se calculan sobre 13 documentos, excluyendo
 config.TRIAJE_ABLACION_CASO (req_002.pdf): comparte los 8 campos de contenido
@@ -135,6 +141,53 @@ def normaliza_articulos(lista: list[str]) -> set[str]:
     return resultado
 
 
+def normaliza_articulo_numero(texto: str) -> list[str]:
+    """
+    Como normaliza_articulo, pero ignorando la ley: solo el número de
+    artículo ("art. N"). Separa la capacidad de LOCALIZAR la referencia en
+    el texto (¿está el número?) de la de ATRIBUIRLA a la norma correcta
+    (normaliza_articulo, que exige ambas cosas). Mismo criterio de fallback
+    que normaliza_articulo: si no hay número reconocible, se devuelve el
+    texto normalizado tal cual.
+    """
+    t = _sin_tildes(texto).lower()
+    m = _RE_NUM_RUN.search(t)
+    numeros = [re.sub(r"\s+", "", n) for n in _RE_NUM_UNO.findall(m.group(1))] if m else []
+
+    if not numeros:
+        return [re.sub(r"\s+", " ", t).strip()]
+    return [f"art. {n}" for n in numeros]
+
+
+def normaliza_articulos_numero(lista: list[str]) -> set[str]:
+    resultado: set[str] = set()
+    for item in lista:
+        resultado.update(normaliza_articulo_numero(item))
+    return resultado
+
+
+def _mapa_ley_por_numero(lista: list[str]) -> dict[str, str]:
+    """
+    numero de artículo -> ley detectada, para las citas de UN documento.
+    Se usa solo para calcular la tasa de atribución correcta (cruzar, para
+    cada número acertado en el criterio laxo, si también lleva la ley
+    correcta en el criterio estricto). Si un mismo número apareciera más de
+    una vez con leyes distintas (no ocurre en este corpus), se queda con la
+    última.
+    """
+    mapa: dict[str, str] = {}
+    for item in lista:
+        t = _sin_tildes(item).lower()
+        ley = _detecta_ley(t)
+        m = _RE_NUM_RUN.search(t)
+        numeros = [re.sub(r"\s+", "", n) for n in _RE_NUM_UNO.findall(m.group(1))] if m else []
+        if not ley or not numeros:
+            continue
+        for n in numeros:
+            mapa[n] = ley
+    return mapa
+
+
 LEYES_INDEXADAS = {"LGT", "LIVA"}
 
 
@@ -232,12 +285,43 @@ def compara_documento(golden: dict, resultado: ResultadoTriaje) -> dict:
             and abs(importe_obtenido - importe_esperado) < 0.005
         )
 
+    articulos_obtenidos_raw = obtenido.get("articulos_citados", [])
+
+    # Estricto: ley + número (p. ej. "LGT art. 203"). Localizar el artículo Y
+    # atribuirlo a la norma correcta.
     esperados_norm = normaliza_articulos(golden["articulos_citados"])
-    obtenidos_norm = normaliza_articulos(obtenido.get("articulos_citados", []))
+    obtenidos_norm = normaliza_articulos(articulos_obtenidos_raw)
     tp = len(esperados_norm & obtenidos_norm)
     precision = (tp / len(obtenidos_norm)) if obtenidos_norm else (1.0 if not esperados_norm else 0.0)
     recall = (tp / len(esperados_norm)) if esperados_norm else (1.0 if not obtenidos_norm else 0.0)
     f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) else 0.0
+
+    # Laxo: solo el número de artículo, ignorando la ley. Solo LOCALIZAR.
+    esperados_num = normaliza_articulos_numero(golden["articulos_citados"])
+    obtenidos_num = normaliza_articulos_numero(articulos_obtenidos_raw)
+    tp_laxo = esperados_num & obtenidos_num
+    precision_laxo = (len(tp_laxo) / len(obtenidos_num)) if obtenidos_num else (1.0 if not esperados_num else 0.0)
+    recall_laxo = (len(tp_laxo) / len(esperados_num)) if esperados_num else (1.0 if not obtenidos_num else 0.0)
+    f1_laxo = (
+        2 * precision_laxo * recall_laxo / (precision_laxo + recall_laxo)
+        if (precision_laxo + recall_laxo) else 0.0
+    )
+
+    # Tasa de atribución correcta: de los números que SÍ se localizan bien
+    # (tp_laxo), ¿qué fracción lleva además la ley correcta? Requiere cruzar,
+    # número a número, la ley que el golden le asigna con la que le asigna
+    # el modelo — el conjunto tp_laxo por sí solo no lo distingue, porque
+    # "art. 136" coincide tanto si ambos dicen LGT como si uno dice LGT y el
+    # otro LIRPF.
+    mapa_esperado = _mapa_ley_por_numero(golden["articulos_citados"])
+    mapa_obtenido = _mapa_ley_por_numero(articulos_obtenidos_raw)
+    numeros_tp = {s[len("art. "):] for s in tp_laxo if s.startswith("art. ")}
+    n_atribuibles = len(numeros_tp)
+    n_atribuidos_bien = sum(
+        1 for n in numeros_tp
+        if n in mapa_esperado and n in mapa_obtenido and mapa_esperado[n] == mapa_obtenido[n]
+    )
+    tasa_atribucion = round(n_atribuidos_bien / n_atribuibles, 4) if n_atribuibles else None
 
     return {
         "fichero": golden["fichero"],
@@ -262,6 +346,12 @@ def compara_documento(golden: dict, resultado: ResultadoTriaje) -> dict:
             "precision": round(precision, 4),
             "recall": round(recall, 4),
             "f1": round(f1, 4),
+            "precision_laxo": round(precision_laxo, 4),
+            "recall_laxo": round(recall_laxo, 4),
+            "f1_laxo": round(f1_laxo, 4),
+            "n_atribuibles": n_atribuibles,
+            "n_atribuidos_bien": n_atribuidos_bien,
+            "tasa_atribucion_correcta": tasa_atribucion,
         },
     }
 
@@ -295,16 +385,34 @@ def agrega(comparaciones: list[dict]) -> dict:
         "acierto_valor": round(sum(c["importe"]["acierto"] for c in casos_valor) / len(casos_valor), 4) if casos_valor else None,
     }
 
+    n_atribuibles_total = sum(c["articulos_citados"]["n_atribuibles"] for c in comparaciones)
+    n_atribuidos_bien_total = sum(c["articulos_citados"]["n_atribuidos_bien"] for c in comparaciones)
+
     articulos_stats = {
         "precision_media": round(sum(c["articulos_citados"]["precision"] for c in comparaciones) / n, 4),
         "recall_media": round(sum(c["articulos_citados"]["recall"] for c in comparaciones) / n, 4),
         "f1_media": round(sum(c["articulos_citados"]["f1"] for c in comparaciones) / n, 4),
+        "precision_laxo_media": round(sum(c["articulos_citados"]["precision_laxo"] for c in comparaciones) / n, 4),
+        "recall_laxo_media": round(sum(c["articulos_citados"]["recall_laxo"] for c in comparaciones) / n, 4),
+        "f1_laxo_media": round(sum(c["articulos_citados"]["f1_laxo"] for c in comparaciones) / n, 4),
+        # Micro-promedio (agrupa aciertos/posibles de todo el corpus antes de
+        # dividir), no media de las tasas por documento: con recuentos tan
+        # pequeños por documento (a menudo 2-5 artículos), la media de tasas
+        # pesaría igual un documento con 1 acierto de 1 posible que otro con
+        # 4 de 5, lo cual no es representativo.
+        "n_atribuibles_total": n_atribuibles_total,
+        "n_atribuidos_bien_total": n_atribuidos_bien_total,
+        "tasa_atribucion_correcta": (
+            round(n_atribuidos_bien_total / n_atribuibles_total, 4) if n_atribuibles_total else None
+        ),
         "por_documento": [
             {
                 "fichero": c["fichero"],
                 "precision": c["articulos_citados"]["precision"],
                 "recall": c["articulos_citados"]["recall"],
                 "f1": c["articulos_citados"]["f1"],
+                "f1_laxo": c["articulos_citados"]["f1_laxo"],
+                "tasa_atribucion_correcta": c["articulos_citados"]["tasa_atribucion_correcta"],
             }
             for c in sorted(comparaciones, key=lambda c: c["fichero"])
         ],
@@ -460,17 +568,39 @@ def genera_markdown(resumen: dict, ablacion: dict) -> str:
     lineas.append("")
 
     art = resumen["articulos_citados"]
-    lineas.append("## articulos_citados (precisión / exhaustividad / F1)\n")
-    lineas.append("| Precisión media | Exhaustividad media | F1 media |")
-    lineas.append("|---:|---:|---:|")
-    lineas.append(f"| {_fmt_pct(art['precision_media'])} | {_fmt_pct(art['recall_media'])} | {_fmt_pct(art['f1_media'])} |")
+    lineas.append("## articulos_citados: localizar vs. atribuir\n")
+    lineas.append(
+        "Dos criterios distintos, no uno solo: **estricto** exige ley y número "
+        "(\"LGT art. 203\"), y mide localizar la referencia Y atribuirla a la "
+        "norma correcta a la vez. **Laxo** compara solo el número de artículo, "
+        "ignorando la ley, y mide únicamente si el modelo localiza la "
+        "referencia en el texto. La brecha entre ambos aísla los fallos de "
+        "atribución de norma (ver decisiones.md): un F1 laxo alto con F1 "
+        "estricto bajo indica que el modelo encuentra los artículos pero los "
+        "atribuye a la ley equivocada, no que no los encuentre.\n"
+    )
+    lineas.append("| Métrica | Estricto (ley + número) | Laxo (solo número) |")
+    lineas.append("|---|---:|---:|")
+    lineas.append(f"| Precisión media | {_fmt_pct(art['precision_media'])} | {_fmt_pct(art['precision_laxo_media'])} |")
+    lineas.append(f"| Exhaustividad media | {_fmt_pct(art['recall_media'])} | {_fmt_pct(art['recall_laxo_media'])} |")
+    lineas.append(f"| F1 media | {_fmt_pct(art['f1_media'])} | {_fmt_pct(art['f1_laxo_media'])} |")
     lineas.append("")
+    lineas.append(
+        f"**Tasa de atribución correcta**: de los {art['n_atribuibles_total']} números de artículo "
+        f"localizados correctamente (aciertos del criterio laxo), **{art['n_atribuidos_bien_total']}** "
+        f"llevan además la ley correcta — {_fmt_pct(art['tasa_atribucion_correcta'])}. Micro-promedio "
+        "sobre todo el corpus (no media de tasas por documento, con recuentos por documento demasiado "
+        "pequeños para que esa media sea representativa).\n"
+    )
 
-    lineas.append("### F1 por documento\n")
-    lineas.append("| Fichero | Precisión | Exhaustividad | F1 |")
+    lineas.append("### F1 por documento (estricto vs. laxo) y atribución\n")
+    lineas.append("| Fichero | F1 estricto | F1 laxo | Atribución correcta |")
     lineas.append("|---|---:|---:|---:|")
     for d in art["por_documento"]:
-        lineas.append(f"| {d['fichero']} | {_fmt_pct(d['precision'])} | {_fmt_pct(d['recall'])} | {_fmt_pct(d['f1'])} |")
+        lineas.append(
+            f"| {d['fichero']} | {_fmt_pct(d['f1'])} | {_fmt_pct(d['f1_laxo'])} | "
+            f"{_fmt_pct(d['tasa_atribucion_correcta'])} |"
+        )
     lineas.append("")
 
     cov = resumen["cobertura_indice_lgt_liva"]
