@@ -17,3 +17,6 @@ data/normativa/*.pdf
 
 # Caché de modelos de HuggingFace si se configura en local
 .cache/
+
+# Copia local de la memoria para consulta (fuente en Overleaf)
+memoria/
