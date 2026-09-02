@@ -41,7 +41,7 @@ completa. Limitación asumida: los tiempos de generación con este hardware no
 son aptos para explotación real.
 
 ## 2026-08-28 · Corpus de triaje sintético y reproducible. 
-El corpus de evaluación del triaje (14 requerimientos AEAT) se genera por script desde una única estructura de datos, de la que se derivan a la vez el PDF y su anotación, de modo que documento y golden no pueden divergir. Se descarta usar notificaciones reales anonimizadas: evita el tratamiento de datos personales de contribuyentes y permite publicar el corpus como anexo de la memoria.
+El corpus de evaluación del triaje (14 requerimientos AEAT) se genera por script desde una única estructura de datos, de la que se derivan a la vez el PDF y su anotación, de modo que documento y golden no pueden divergir. Se descarta usar notificaciones reales anonimizadas: evita el tratamiento de datos personales de contribuyentes.
 
 ## 2026-08-28 · Convenciones de anotación de eval/golden_triaje.json. 
 periodo usa el código AEAT (1T–4T, 0A para anual); impuesto la sigla normalizada aunque el documento solo use la denominación desarrollada; importe es únicamente la cantidad que el documento exige o propone ingresar, no cualquier cifra en euros (bases y cuotas soportadas son distractores deliberados); nif es el del obligado tributario, nunca el del representante; articulos_citados se normaliza a nivel de artículo sin apartado, en formato "<NORMA> art. <N>".
@@ -49,12 +49,9 @@ periodo usa el código AEAT (1T–4T, 0A para anual); impuesto la sigla normaliz
 ## 2026-08-28 · Limitación conocida: sesgo del corpus de triaje. 
 El corpus está generado por un LLM y será procesado por un LLM, por lo que su vocabulario es más homogéneo y limpio que el de una notificación real (sin ruido de OCR ni PDF escaneado). Es el mismo sesgo optimista ya identificado en el golden set del recuperador. Además, con n = 14 la granularidad mínima de cualquier métrica es de 7,1 puntos, insuficiente para discriminar configuraciones próximas: ampliar el corpus antes de medir.
 
-## 2026-08-28 · Debilidad de la taxonomía de tipo_documento. 
-Las cinco clases del triaje mezclan dos ejes: cuatro describen la forma del acto administrativo (requerimiento, propuesta de liquidación, trámite de audiencia, acuerdo sancionador) y una describe la materia (requerimiento_iva_no_deducible), por lo que no son mutuamente excluyentes. Se asume conscientemente por ser una taxonomía operativa orientada al enrutamiento en una asesoría; la alternativa, separar forma_acto y materia en dos campos, queda documentada como mejora inmediata.
-
 
 ## 2026-08-28 · Recorte de alcance por calendario. 
-Se descarta la ampliación del golden set a 35-40 preguntas (coste 8-10 h, valor defensivo ya cubierto por la sección de limitaciones) y se reducen a 8 los requerimientos sintéticos de la AEAT. Se mantienen la prueba de troceado por longitud fija (2 h, sostiene la decisión del apartado 3.3.3) y una API con cuatro endpoints sin autenticación, con usuario fijo documentado como acotación de alcance.
+Se descarta la ampliación del golden set a 35-40 preguntas (coste 8-10 h, valor defensivo ya cubierto por la sección de limitaciones) y se reducen a 14 los requerimientos sintéticos de la AEAT. Se mantienen la prueba de troceado por longitud fija (2 h, sostiene la decisión del apartado 3.3.3) y una API con cuatro endpoints sin autenticación, con usuario fijo documentado como acotación de alcance.
 
 ## 2026-08-28 · Criterio de evaluación revisado en la memoria. 
 El capítulo 5 debe presentar explícitamente que Recall@5, fijada a priori como métrica de decisión, resultó saturada (93,3 % en las cinco configuraciones) y que la decisión se trasladó a MRR y Recall@1. Presentar MRR como criterio original desaprovecha el argumento metodológico.
@@ -166,8 +163,6 @@ La categoría requerimiento_iva_no_deducible del golden de triaje mezcla natural
 ## 2026-08-30 · Limitación del corpus sintético de triaje. 
 Los requerimientos y sus anotaciones se generaron con el mismo asistente, por lo que la correspondencia entre documento y campos anotados es más regular que en notificaciones reales de la AEAT. Los resultados en campos de formato fijo no son extrapolables a documentos reales; el F1 de articulos_citados constituye el indicador más representativo de la dificultad efectiva de la tarea.
 
-## 2026-08-30 · AÑADIR A MEMORIA
-La primera versión del conjunto anotado incluía la categoría requerimiento_iva_no_deducible, que mezclaba la naturaleza del acto administrativo con la materia tributaria sobre la que versa, a diferencia de las restantes categorías, definidas exclusivamente por la primera. La primera corrida puso de manifiesto la inconsistencia: el modelo clasificó los tres documentos afectados conforme al criterio de naturaleza del acto, y esa clasificación resultó ser la correcta al contrastarla con el encabezado de los documentos. La categoría se eliminó y los tres casos se reetiquetaron: los dos encabezados como «Requerimiento y propuesta de liquidación provisional» pasaron a propuesta_liquidacion_provisional, por ser este el acto de mayor entidad jurídica de los dos concurrentes, y el restante a requerimiento_documentacion. La corrección se aplicó sobre el conjunto de anotaciones y no sobre el sistema evaluado.
 
 ## 2026-08-30 · Segunda corrida del triaje: temperatura escalada, NIF desacoplado del esquema, cobertura sobre el golden.
 Tres correcciones al módulo, motivadas por el diagnóstico de req_012 y por el
@@ -203,15 +198,11 @@ campos), articulos_citados F1 = 0,477 (antes 0,446: req_012 pasa de aportar
 F1=0,00 —sin datos— a F1=0,40). El F1 por documento (nuevo, en
 tabla_triaje.md) muestra la varianza real: 100 % en req_001/006/013, 0 % en
 los tres documentos IRPF con la confusión LIRPF/LGT ya diagnosticada
-(req_004, req_011, req_014). La media (0,477) oculta esa bimodalidad; el
-desglose por documento es el dato que hay que citar en la memoria, no la
-media sola.
+(req_004, req_011, req_014). 
 
 ## 2026-08-30 · Resultados finales del triaje. 
 Tras corregir la taxonomía y desacoplar la validación del NIF del esquema: validación estructural 100 %, tipo_documento 100 %, NIF 92,3 % (el único fallo es req_012, artefacto del corpus), articulos_citados F1 0,477 y cobertura del índice 75,0 % calculada sobre el golden. Los dos primeros valores derivan de correcciones metodológicas y no de mejoras del modelo, lo que debe declararse al presentarlos; el F1 de artículos y la exactitud del NIF son los indicadores de rendimiento efectivo.
 
-## 2026-08-30 · Distribución bimodal en la extracción de artículos. 
-El F1 medio de 0,477 encubre tres documentos con F1 = 1,00 y tres con F1 = 0,00, correspondientes estos últimos a requerimientos de IRPF en los que se confunde la atribución entre LIRPF y LGT. El fallo es sistemático y no aleatorio, en paralelo al del art. 84 LIVA en el módulo de recuperación, y apunta a la ausencia de normas de referencia en el prompt más que a la capacidad del modelo.
 
 ## 2026-08-30 · Fallo de atribución normativa en el triaje. 
 El modelo asigna a cada artículo citado la ley correspondiente al impuesto del documento en lugar de la norma que el texto asocia a esa cita: en los tres requerimientos de IRPF etiqueta como LIRPF artículos de la LGT, incluidos los de procedimiento (arts. 203, 209, 211), que aplican con independencia del impuesto. Acierta 8 de 9 números de artículo y no inventa ninguno, de modo que el F1 de 0,00 en esos casos mide la atribución de norma y no la localización de la referencia.
@@ -219,5 +210,26 @@ El modelo asigna a cada artículo citado la ley correspondiente al impuesto del 
 ## 2026-08-30 · El fallo de atribución es silencioso y propaga error a la cadena completa. 
 Una cita mal atribuida (p. ej. «LIRPF art. 203») supera la validación de esquema, existe como número de artículo y no es detectada por ningún control del sistema, pero conduce al recuperador a un índice que no contiene esa norma, de modo que el borrador se fundamenta sobre contexto inadecuado con formato impecable. Constituye la limitación más relevante del prototipo y el principal argumento a favor de la revisión humana obligatoria del apartado 3.4. Mitigaciones propuestas como trabajo futuro: fijar en el prompt la lista cerrada de normas admisibles con la regla de que los artículos de procedimiento pertenecen a la LGT, y validar cada atribución contra el índice para convertir el fallo silencioso en fallo detectable.
 
+## 2026-08-30 · Modelo generativo local seleccionado. 
+Se emplea Qwen2.5-3B-Instruct en formato GGUF con cuantización Q4_K_M (~2 GB), servido mediante Ollama con temperatura 0,1 y contexto de 8192 tokens. Ocupa 2288 MiB de los 4096 de la GTX 1650, lo que permite ejecución íntegra en GPU. El modelo hubo de descargarse desde Hugging Face e importarse con un Modelfile propio (qwen3b-tfg), ya que el registro de Ollama descarga los pesos desde un dominio de almacenamiento de Cloudflare bloqueado en la red de desarrollo.
+
+## 2026-08-30 · Coerción de tipos en la salida del extractor. 
+El modelo devuelve de forma recurrente los campos numéricos como cadenas ("ejercicio": "2023"), por lo que la validación Pydantic debe coercionar tipos y la comparación con el golden set ha de realizarse sobre el objeto ya validado y no sobre el JSON crudo, para evitar fallos atribuibles a diferencia de tipo y no de contenido.
+
 ## 2026-08-31 · Desglose de la extracción de artículos: localización frente a atribución. 
 Con F1 laxo (solo número) de 96,9 % y precisión laxa del 100 %, el modelo no inventa ninguna referencia y localiza casi todas; el F1 estricto (ley + número) cae a 47,7 % y la tasa de atribución correcta es del 48,7 % (19 de 39 números localizados llevan la ley correcta). El déficit del módulo es, por tanto, exclusivamente de atribución normativa y no de localización, lo que descarta la ampliación del modelo como vía de mejora y señala el prompt y la validación contra el índice como intervenciones pertinentes.
+
+## Auditoría bibliográfica del capítulo 2 (31/08/2026): 
+se detectaron tres errores factuales refutados por documentación oficial —coste en tokens de una captura de pantalla (real: ~1.560 tokens para 1920×1080, no 100-200), cabecera X-Business de la API de Sage (es opcional, no obligatoria) y capacidades del servidor MCP de CData para Sage (es de solo lectura, no admite UPDATE)—, además de una atribución incorrecta a a3innuva de funcionalidades de auditoría que pertenecen a CCH Axcess. Corregidos en la memoria.
+
+## El modelo generativo del módulo de triaje es Qwen2.5-3B 
+(3,09 B de parámetros según la ficha oficial de Hugging Face), no "Qwen2 de 3,4 mil millones" como figuraba en §4.4.1: la familia Qwen2 no publicó ningún modelo de 3B. Corregido para preservar la trazabilidad del experimento.
+
+## El texto consolidado de la Ley 37/1992 (LIVA) tiene una actualización publicada el 28/02/2026. 
+Se declara explícitamente en §4.2.1 la fecha de la redacción efectivamente indexada en el corpus vectorial, para evitar que una reforma posterior a la ingesta invalide los resultados presentados en el capítulo 5.
+
+## 2026-09-01 · Corrección: la distribución del F1 no es bimodal. 
+El desglose documento a documento muestra tres casos con F1 estricto del 100 %, tres del 0 % y siete en valores intermedios (33,3 %, 40 %, 66,7 % y 80 %), de modo que la caracterización como distribución bimodal registrada el 30 de agosto es inexacta y debe sustituirse por la de un gradiente continuo. Lo que sí es categórico es la precisión laxa del 100 %: el modelo no produce ninguna referencia numérica ausente del conjunto esperado.
+
+## 2026-09-01 · Resultados definitivos del triaje. 
+Sobre 13 documentos: exactitud del 100 % en impuesto, ejercicio, periodo, plazo, tipo de documento e importe, y del 92,3 % en NIF (único fallo, req_012, artefacto del corpus); validación de esquema del 100 % a la primera; articulos_citados con F1 laxo del 96,9 % (precisión 100 %) frente a F1 estricto del 47,7 % y atribución correcta del 48,7 %; cobertura del índice del 75,0 % sobre el golden; latencia media de 9,27 s por documento. Los valores del 100 % en tipo de documento y validación de esquema derivan de correcciones metodológicas, no de mejoras del modelo, y así deben presentarse.
