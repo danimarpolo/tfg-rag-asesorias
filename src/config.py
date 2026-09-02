@@ -154,3 +154,14 @@ TRIAJE_EJERCICIO_MAX = 2035
 # de las métricas agregadas y se reporta aparte frente a TRIAJE_ABLACION_BASE.
 TRIAJE_ABLACION_CASO = "req_002.pdf"
 TRIAJE_ABLACION_BASE = "req_001.pdf"
+
+
+# ---------------------------------------------------------------------------
+# 8. Cadena de generación del borrador (drafting)
+# ---------------------------------------------------------------------------
+# Paso 6 del flujo del apartado 3.4: triaje -> recuperación -> generación.
+# Usa el mismo modelo y la misma URL de Ollama que el triaje (sección 7); solo
+# cambia la temperatura y el timeout, por generar texto libre más largo.
+DRAFTING_TEMPERATURA = 0.1   # sin reintento ni escalado: una única llamada
+DRAFTING_TIMEOUT = 300       # segundos; un escrito completo tarda más que el JSON del triaje
+DRAFTING_MAX_TOKENS = 2000   # options.num_predict; límite de seguridad frente a bucles de repetición

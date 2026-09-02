@@ -20,3 +20,9 @@ data/normativa/*.pdf
 
 # Copia local de la memoria para consulta (fuente en Overleaf)
 memoria/
+
+CLAUDE.md
+decisiones.md
+notas_capitulo4.md
+README.md
+tools/corpus/README_corpus.md
