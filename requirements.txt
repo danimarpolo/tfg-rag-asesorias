@@ -28,3 +28,12 @@ langchain-huggingface[full]
 
 # --- Extracción de texto de PDF ---
 pypdf
+
+# --- Backend y frontend del MVP (apartado 3.2.2) ---
+# API REST mínima (api/main.py) y página única de demostración
+# (app/interfaz.py); no forman parte del núcleo del experimento RAG.
+fastapi
+uvicorn
+python-multipart
+streamlit
+requests
