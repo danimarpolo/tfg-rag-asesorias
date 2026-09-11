@@ -16,7 +16,11 @@ Daniel Márquez Polonio. Tutor: Francisco López Valverde.
 - `app/` — interfaz Streamlit de página única.
 - `eval/` — conjuntos de referencia anotados y resultados de las
   evaluaciones en JSON.
+- `tools/corpus/` — generador del corpus sintético de requerimientos y su
+  conjunto anotado, junto con el script de verificación de ambos.
 - `modelfile/` — Modelfile de importación del modelo generativo en Ollama.
+- `data/normativa/` — textos consolidados del BOE (no versionados; deben
+  descargarse antes de ejecutar la ingesta).
 
 ## Resultados principales
 
