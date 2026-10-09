@@ -11,9 +11,13 @@ Calificación: 8,2. Autor: Daniel Márquez Polonio. Tutor: Francisco López Valv
 **Stack:** Python 3.12 · LangChain · ChromaDB · multilingual-e5 · Ollama (Qwen2.5-3B) ·
 Pydantic · FastAPI · Streamlit
 
-<!-- Añade aquí una captura o un GIF de la interfaz:
-![Interfaz del prototipo](docs/interfaz.png)
--->
+<p align="center">
+  <img src="docs/interfaz-triaje.png" alt="Subida del requerimiento y datos extraídos por el triaje" width="32%">
+  <img src="docs/interfaz-referencias.png" alt="Referencias normativas citadas y fragmentos recuperados" width="32%">
+  <img src="docs/interfaz-borrador.png" alt="Borrador de contestación generado" width="32%">
+</p>
+<p align="center"><em>Interfaz del prototipo con un requerimiento sintético: datos del triaje,
+referencias y fragmentos recuperados, y borrador generado.</em></p>
 
 ## Cómo funciona
 
