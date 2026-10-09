@@ -4,8 +4,10 @@
 #   ollama pull qwen2.5:3b-instruct
 #   ollama create qwen3b-tfg -f modelfile/Modelfile
 #
-# Si en el TFG importaste otro archivo GGUF (otra cuantización), cambia la
-# línea FROM por ese modelo para reproducir exactamente los resultados.
+# Los resultados publicados se obtuvieron con un GGUF de Qwen2.5-3B-Instruct
+# en cuantización Q4_K_M importado en local. Este Modelfile parte del modelo
+# equivalente de la biblioteca de Ollama (misma familia y cuantización), por
+# lo que los resultados pueden diferir ligeramente de los de la memoria.
 
 FROM qwen2.5:3b-instruct
 TEMPLATE {{ .Prompt }}

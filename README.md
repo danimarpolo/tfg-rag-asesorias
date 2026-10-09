@@ -17,7 +17,9 @@ Pydantic · FastAPI · Streamlit
   <img src="docs/interfaz-borrador.png" alt="Borrador de contestación generado" width="32%">
 </p>
 <p align="center"><em>Interfaz del prototipo con un requerimiento sintético: datos del triaje,
-referencias y fragmentos recuperados, y borrador generado.</em></p>
+referencias y fragmentos recuperados, y borrador generado. El borrador es la salida directa
+del modelo de 3B, sin retocar: en este ejemplo cita el art. 206 bis LGT, recuperado por
+similitud pero no pertinente (ver Limitaciones).</em></p>
 
 ## Cómo funciona
 
@@ -70,6 +72,9 @@ fija (`eval/tabla_comparativa_chunking.md`).
 - **Modo de fallo silencioso**: un error de atribución en el triaje puede propagarse por la
   recuperación hasta el borrador sin que ningún control lo detecte, generando un documento
   formalmente válido pero incorrecto.
+- **Pertinencia de las citas**: el borrador puede apoyarse en artículos recuperados por
+  similitud semántica que no son pertinentes para el caso, aunque estén bien fundamentados
+  en el índice. Por eso todo borrador requiere revisión profesional.
 - La detección de alucinaciones cubre las **referencias normativas**, no los datos de hecho
   (fechas, números de expediente).
 - La salida del modelo **varía entre ejecuciones** con la misma entrada.
