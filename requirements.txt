@@ -37,3 +37,7 @@ uvicorn
 python-multipart
 streamlit
 requests
+
+# --- Generador del corpus sintético (tools/corpus/build_corpus.py) ---
+# Solo hace falta para regenerar los PDF de eval/corpus_triaje/.
+reportlab
